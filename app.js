@@ -1,6 +1,9 @@
 'use strict';
 const express = require("express");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const userRoutes = require("./routes/user");
@@ -21,6 +24,9 @@ mongoose.connect(database, {
 const app = express();
 
 // routes
+app.use(morgan("dev"));
+app.use(bodyParser.json());
+app.use(cookieParser());
 app.use("/api", userRoutes);
 
 app.listen(port, () => {
