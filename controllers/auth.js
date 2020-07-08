@@ -2,11 +2,11 @@
 const jwt = require("jsonwebtoken");
 const expressJWT = require("express-jwt");
 
-const User = require("../models/user");
+const Auth = require("../models/user");
 const JWT_SECRET = process.env.JWT_SECRET || "ifdjsaihidshgo";
 
 exports.signup = (req, res) => {
-    const user = new User(req.body);
+    const user = new Auth(req.body);
     user.save((err, user) => {
         if (err) {
             return res.status(400).json({error: err.message});
@@ -19,10 +19,10 @@ exports.signup = (req, res) => {
 
 exports.signin = (req, res) => {
     const { email, password } = req.body;
-    User.findOne({ email }, (err, user) => {
+    Auth.findOne({ email }, (err, user) => {
         if (err || !user) {
             return res.status(400).json({
-                error: 'User with that email does not exist. Please signup'
+                error: 'Auth with that email does not exist. Please signup'
             });
         }
         if (!user.authenticate(password)) {
@@ -30,14 +30,20 @@ exports.signin = (req, res) => {
                 error: 'Email and password dont match'
             });
         }
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+        const token = jwt.sign({ _id: user._id }, JWT_SECRET);
         res.cookie('t', token, { expire: new Date() + 9999 });
         const { _id, name, email, role } = user;
         return res.json({ token, user: { _id, email, name, role } });
     });
 };
 
+exports.requireSignin = expressJWT({
+    secret: JWT_SECRET,
+    algorithms: ["HS256"]
+
+});
+
 exports.signout = (req, res) => {
     res.clearCookie("t");
-    res.json({message: "User signed out"});
+    res.json({message: "Auth signed out"});
 }

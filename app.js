@@ -7,7 +7,7 @@ const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
 require("dotenv").config();
 
-const userRoutes = require("./routes/user");
+const authRoutes = require("./routes/auth");
 
 // env
 const port = process.env.PORT || 8000;
@@ -29,7 +29,7 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
-app.use("/api", userRoutes);
+app.use("/api", authRoutes);
 
 app.listen(port, () => {
     console.log(`server running on port ${port}`);
