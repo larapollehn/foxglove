@@ -57,6 +57,9 @@ userSchema.methods = {
         } catch (error) {
             return "";
         }
+    },
+    authenticate: function (plainPassword) {
+        return this.encryptPassword(plainPassword) === this.hashed_password;
     }
 };
 
