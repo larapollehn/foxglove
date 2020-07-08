@@ -30,6 +30,7 @@ exports.signin = (req, res) => {
                 error: 'Email and password dont match'
             });
         }
+        // create and sign jwt, payload is userId
         const token = jwt.sign({ _id: user._id }, JWT_SECRET);
         res.cookie('t', token, { expire: new Date() + 9999 });
         const { _id, name, email, role } = user;
