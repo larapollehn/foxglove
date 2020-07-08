@@ -16,7 +16,3 @@ exports.userSignupValidator = (req, res, next) => {
     next();
 }
 
-
-exports.userSigninValidator = (req, res, next) => {
-    next();
-}
