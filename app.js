@@ -7,14 +7,13 @@ const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
 require("dotenv").config();
 
-const log = require("./utils/Logger");
-const authRoutes = require("./routes/auth");
-const userRoutes = require("./routes/user");
-const categoryRoutes = require("./routes/category");
-const productRoutes = require("./routes/product");
+const log = require("./src/utils/Logger");
+const authRoutes = require("./src/routes/auth");
+const userRoutes = require("./src/routes/user");
+const categoryRoutes = require("./src/routes/category");
+const productRoutes = require("./src/routes/product");
 
 // env
-const port = process.env.PORT || 8000;
 const database = process.env.DATABASE
 
 // db
@@ -38,6 +37,4 @@ app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 
-app.listen(port, () => {
-    log.debug("Server running on port", port);
-})
+module.exports = app;
