@@ -7,10 +7,11 @@ const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
 require("dotenv").config();
 
+const log = require("./utils/Logger");
 const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/user");
 const categoryRoutes = require("./routes/category");
-const productRoutes = require("./routes/category");
+const productRoutes = require("./routes/product");
 
 // env
 const port = process.env.PORT || 8000;
@@ -21,7 +22,7 @@ mongoose.connect(database, {
     useNewUrlParser: true,
     useCreateIndex: true
 }).then(() => {
-    console.log("DB connected");
+    log.debug('Database connection established');
 })
 
 // app
@@ -38,5 +39,5 @@ app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 
 app.listen(port, () => {
-    console.log(`server running on port ${port}`);
+    log.debug("Server running on port", port);
 })

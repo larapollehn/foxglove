@@ -37,6 +37,7 @@ const userSchema = new mongoose.Schema({
 );
 
 // virtual field
+// encrypts users password with a randomly generated salt
 userSchema.virtual("password")
 .set(function (password) {
     this._password = password;
@@ -48,6 +49,7 @@ userSchema.virtual("password")
 })
 
 userSchema.methods = {
+    // user password is encrypted with sha1 and salt
     encryptPassword: function (password) {
         if(!password) return "";
         try{
@@ -58,6 +60,8 @@ userSchema.methods = {
             return "";
         }
     },
+    // checks is the password from the users input is equal to the password from the user account
+    // compares hashed versions of passwords
     authenticate: function (plainPassword) {
         return this.encryptPassword(plainPassword) === this.hashed_password;
     }

@@ -9,11 +9,11 @@ exports.create = (req, res) => {
     form.keepExtensions = true;
     form.parse(req, (err, fields, files) => {
         if (err){
-            return res.state(400).json({error: "Image could not be uploaded"});
+            return res.status(400).json({error: err.message});
         }
         let product = new Product(fields);
         if(files.photo){
-            product.photo.data = fs.readdirSync(files.photo.path);
+            product.photo.data = fs.readFileSync(files.photo.path);
             product.photo.contentType = files.photo.type;
         }
         product.save((err, result) => {
