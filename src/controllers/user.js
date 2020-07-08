@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 const User = require("../models/user");
 const log = require("../utils/Logger");
 /**
@@ -6,12 +6,14 @@ const log = require("../utils/Logger");
  * return user if found
  */
 exports.userById = (req, res, next, id) => {
-    log.debug('User was searched by id:', id);
-    User.findById(id).exec((err, user) => {
-        if (err || !user){
-            return res.status(400).json({error: "User not found"});
-        }
-        req.profile = user;
-        next();
-    })
-}
+  log.debug("User was searched by id:", id);
+  User.findById(id)
+    .exec((err, user) => {
+      if (err || !user) {
+        return res.status(400)
+          .json({ error: "User not found" });
+      }
+      req.profile = user;
+      next();
+    });
+};
