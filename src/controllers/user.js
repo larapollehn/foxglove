@@ -1,4 +1,3 @@
-"use strict";
 const User = require("../models/user");
 const log = require("../utils/Logger");
 /**

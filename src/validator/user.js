@@ -9,7 +9,7 @@ exports.userSignupValidator = (req, res, next) => {
   req.check("email")
     .isLength({
       min: 4,
-      max: 32
+      max: 32,
     })
     .withMessage("Email must be between 4 and 32 characters");
   req.check("password", "Password is required")
@@ -22,9 +22,7 @@ exports.userSignupValidator = (req, res, next) => {
     .withMessage("Password must contain a number");
   const errors = req.validationErrors();
   if (errors) {
-    const firstError = errors.map(error => {
-      error.msg;
-    })[0];
+    const firstError = errors.map(error => error.msg)[0];
     return res.status(400)
       .send(firstError);
   }

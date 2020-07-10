@@ -1,13 +1,11 @@
-"use strict";
-
 exports.createProduct = (req, res, next) => {
-  req.check("name",)
+  req.check("name")
     .notEmpty();
-  req.check("description",)
+  req.check("description")
     .notEmpty();
-  req.check("price",)
+  req.check("price")
     .notEmpty();
-  req.check("category",)
+  req.check("category")
     .notEmpty();
   const errors = req.validationErrors();
   if (errors) {

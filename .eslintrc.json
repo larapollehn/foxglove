@@ -11,6 +11,11 @@
     "ecmaVersion": 6
   },
   "rules": {
+    "no-shadow": "off",
+    "eqeqeq": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "func-names": "off",
     "comma-dangle": 1,
     "quotes": [
       2,
