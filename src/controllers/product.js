@@ -24,6 +24,12 @@ exports.create = (req, res) => {
     });
 };
 
-exports.productById = (req, res, next) => {
-
+exports.productById = (req, res, next, id) => {
+    Product.findById(id).execute((error, product) => {
+        if(error || !product){
+            return res.status(400).json({ error: "Product not found" });
+        }
+        req.prouct = product;
+        next();
+    })
 };
