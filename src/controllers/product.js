@@ -113,14 +113,31 @@ exports.updateProduct = (req, res) => {
 exports.getRelatedProducts = (req, res) => {
   log.debug("Related proucts were requested");
   let limit = req.query.limit ? parseInt(req.query.limit) : 3;
-  Product.find({_id: {$ne: req.product}, category: req.product.category})
+  Product.find({
+    _id: { $ne: req.product },
+    category: req.product.category
+  })
     .limit(limit)
     .populate("category", "_id name")
     .exec((err, products) => {
-      if(err){
-        return res.status(400).json({error: "Products found"});
+      if (err) {
+        return res.status(400)
+          .json({ error: "Products found" });
       }
       log.debug("Related products were found, amount:", products.length);
-      return res.json({products});
-    })
-}
+      return res.json({ products });
+    });
+};
+
+exports.listProductCategories = (req, res) => {
+  log.debug("List of all product categories was requested");
+  Product.distinct("category", {}, (err, productCategories) => {
+    if (err) {
+      return res.status(400)
+        .json({
+          error: "No product catgories found"
+        });
+    }
+    res.json({ productCategories });
+  });
+};
