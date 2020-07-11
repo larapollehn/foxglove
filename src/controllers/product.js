@@ -153,7 +153,7 @@ exports.listBySearch = (req, res) => {
   let limit = req.body.limit ? parseInt(req.body.limit) : 100;
   let skip = parseInt(req.body.skip);
   let findArgs = {};
-
+  log.debug("Product was searched by user:", order, sortBy, limit);
 
   for (let key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
@@ -188,3 +188,19 @@ exports.listBySearch = (req, res) => {
       });
     });
 };
+
+/**
+ * works as middleware to provide photo of product
+ * @param req
+ * @param res
+ * @param next
+ * @returns {boolean | void}
+ */
+exports.getProductPhoto = (req, res, next) => {
+  log.debug("Product photo is requested");
+  if(req.product.photo.data){
+    res.set("Content-Type", req.product.photo.contentType);
+    return res.send(req.product.photo.data);
+  }
+  next();
+}
