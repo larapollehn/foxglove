@@ -1,5 +1,12 @@
 version: "3"
 services:
+  buchling_frontend:
+    build: ./frontend
+    container_name: buchling_frontend
+    restart: always
+    ports:
+    - 3014:80
+
   buchling_backend:
     build: ./backend
     container_name: buchling_backend
