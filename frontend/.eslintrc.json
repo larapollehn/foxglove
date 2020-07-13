@@ -1,0 +1,34 @@
+{
+  "extends": "react-app",
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "plugins": [
+    "import"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "radix": "off",
+    "no-restricted-syntax": "off",
+    "no-shadow": "off",
+    "eqeqeq": "off",
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "func-names": "off",
+    "comma-dangle": 1,
+    "quotes": [
+      2,
+      "double"
+    ],
+    "strict": 2,
+    "Linebreak-style": 0,
+    "no-unused-vars": 0,
+    "max-len": 0,
+    "consistent-return": "off",
+    "indent": "off",
+    "arrow-parens": "off"
+  }
+}
