@@ -61,12 +61,12 @@ exports.read = (req, res) => {
 };
 
 /**
- * remove product
+ * remove product completely (from website and database)
  * @param req
  * @param res
  */
 exports.removeProduct = (req, res) => {
-  const product = req.product;
+  const { product } = req;
   log.debug("product was requested to be deleted", product.id);
   product.remove((err, deleteProduct) => {
     if (err) {
@@ -75,11 +75,16 @@ exports.removeProduct = (req, res) => {
     }
     res.json({
       deleteProduct,
-      message: "Product deleted successfully"
+      message: "Product deleted successfully",
     });
   });
 };
 
+/**
+ * admin can change product details based
+ * @param req
+ * @param res
+ */
 exports.updateProduct = (req, res) => {
   const form = new formidable.IncomingForm();
   form.keepExtensions = true;
@@ -88,7 +93,7 @@ exports.updateProduct = (req, res) => {
       return res.status(400)
         .json({ error: err.message });
     }
-    let product = req.product;
+    let { product } = req;
     product = _.extend(product, fields);
     if (files.photo) {
       product.photo.data = fs.readFileSync(files.photo.path);
@@ -112,10 +117,10 @@ exports.updateProduct = (req, res) => {
  */
 exports.getRelatedProducts = (req, res) => {
   log.debug("Related proucts were requested");
-  let limit = req.query.limit ? parseInt(req.query.limit) : 3;
+  const limit = req.query.limit ? parseInt(req.query.limit) : 3;
   Product.find({
     _id: { $ne: req.product },
-    category: req.product.category
+    category: req.product.category,
   })
     .limit(limit)
     .populate("category", "_id name")
@@ -135,7 +140,7 @@ exports.listProductCategories = (req, res) => {
     if (err) {
       return res.status(400)
         .json({
-          error: "No product catgories found"
+          error: "No product catgories found",
         });
     }
     res.json({ productCategories });
@@ -144,25 +149,26 @@ exports.listProductCategories = (req, res) => {
 
 /**
  * search product requested by search in frontend
+ * using filters like price range, order and amount of products to be displayed
  * @param req
  * @param res
  */
 exports.listBySearch = (req, res) => {
-  let order = req.body.order ? req.body.order : "desc";
-  let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
-  let limit = req.body.limit ? parseInt(req.body.limit) : 100;
-  let skip = parseInt(req.body.skip);
-  let findArgs = {};
+  const order = req.body.order ? req.body.order : "desc";
+  const sortBy = req.body.sortBy ? req.body.sortBy : "_id";
+  const limit = req.body.limit ? parseInt(req.body.limit) : 100;
+  const skip = parseInt(req.body.skip);
+  const findArgs = {};
   log.debug("Product was searched by user:", order, sortBy, limit);
 
-  for (let key in req.body.filters) {
+  for (const key in req.body.filters) {
     if (req.body.filters[key].length > 0) {
       if (key === "price") {
         // gte -  greater than price [0-10]
         // lte - less than
         findArgs[key] = {
           $gte: req.body.filters[key][0],
-          $lte: req.body.filters[key][1]
+          $lte: req.body.filters[key][1],
         };
       } else {
         findArgs[key] = req.body.filters[key];
@@ -170,6 +176,7 @@ exports.listBySearch = (req, res) => {
     }
   }
 
+  log.debug("Products in range should have the args:", findArgs);
   Product.find(findArgs)
     .select("-photo")
     .populate("category")
@@ -179,12 +186,12 @@ exports.listBySearch = (req, res) => {
     .exec((err, data) => {
       if (err) {
         return res.status(400).json({
-          error: "Products not found"
+          error: "Products not found",
         });
       }
       res.json({
         size: data.length,
-        data
+        data,
       });
     });
 };
@@ -198,9 +205,9 @@ exports.listBySearch = (req, res) => {
  */
 exports.getProductPhoto = (req, res, next) => {
   log.debug("Product photo is requested");
-  if(req.product.photo.data){
+  if (req.product.photo.data) {
     res.set("Content-Type", req.product.photo.contentType);
     return res.send(req.product.photo.data);
   }
   next();
-}
+};

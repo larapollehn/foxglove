@@ -72,7 +72,7 @@ exports.requireSignin = expressJWT({
 });
 
 /**
- * checks is user is authenticated and profile matches authenticated user is
+ * checks if user is authenticated and profile matches authenticated user is
  */
 exports.isAuth = (req, res, next) => {
   const user = req.profile && req.auth && req.profile._id == req.auth._id;

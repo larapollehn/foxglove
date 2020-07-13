@@ -2,15 +2,17 @@ const express = require("express");
 
 const router = express.Router();
 
-const { create, productById, read, removeProduct, updateProduct, getProductPhoto, getRelatedProducts, listBySearch, listProductCategories } = require("../controllers/product");
+const {
+ create, productById, read, removeProduct, updateProduct, getProductPhoto, getRelatedProducts, listBySearch, listProductCategories,
+} = require("../controllers/product");
 const { userById } = require("../controllers/user");
 const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 const { validateProduct } = require("../validator/product");
 
 router.get("/product/:productId", read);
-router.get("/product/related/:productId", getRelatedProducts)
+router.get("/product/related/:productId", getRelatedProducts);
 router.get("/products/categories", listProductCategories);
-router.get("/product/photo/:productId", getProductPhoto)
+router.get("/product/photo/:productId", getProductPhoto);
 router.post("/product/create/:userId", create);
 router.post("/product/by/search", listBySearch);
 router.delete("/product/:productId/:userId", removeProduct);

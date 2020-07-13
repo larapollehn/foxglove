@@ -11,6 +11,8 @@
     "ecmaVersion": 6
   },
   "rules": {
+    "radix": "off",
+    "no-restricted-syntax": "off",
     "no-shadow": "off",
     "eqeqeq": "off",
     "no-param-reassign": "off",
