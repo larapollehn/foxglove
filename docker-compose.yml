@@ -12,3 +12,4 @@ services:
   buchling_database:
     image: mongo
     container_name: buchling_database
+

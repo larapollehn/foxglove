@@ -1,4 +1,5 @@
 "use strict";
+
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
@@ -13,16 +14,17 @@ const categoryRoutes = require("./src/routes/category");
 const productRoutes = require("./src/routes/product");
 
 // env
-const database = process.env.DATABASE;
+const DATABASE = process.env.DATABASE;
 
 // db
-mongoose.connect(database, {
+mongoose.connect(DATABASE, {
   useNewUrlParser: true,
   useCreateIndex: true
-})
-  .then(() => {
-    log.debug("Database connection established");
-  });
+}).then(() => {
+    log.debug("Database connection established with", DATABASE);
+}).catch((error) => {
+  log.error(`Database connection to ${DATABASE} not be established`, error)
+});
 
 // app
 const app = express();
