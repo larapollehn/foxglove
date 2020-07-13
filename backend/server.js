@@ -1,4 +1,5 @@
 "use strict";
+require("dotenv-flow").config();
 const app = require("./app");
 const log = require("./src/utils/Logger");
 
