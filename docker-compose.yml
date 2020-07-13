@@ -5,7 +5,7 @@ services:
     container_name: buchling_backend
     restart: always
     ports:
-    - 3012:8000
+    - 3013:8000
     depends_on:
       - buchling_database
 
