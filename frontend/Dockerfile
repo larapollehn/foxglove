@@ -12,7 +12,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:apline
+FROM nginx:alpine
 
 COPY --from=build /app/build/ /var/www/
 
