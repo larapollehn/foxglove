@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node server.js",
+    "production": "NODE_ENV=production node server.js",
+    "development": "NODE_ENV=development nodemon server.js",
     "fix": "eslint ./src/** --fix",
     "lint": "eslint ./src/**"
   },
@@ -17,6 +18,7 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "dotenv-flow": "^3.2.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "express": "^4.17.1",
     "express-jwt": "^6.0.0",

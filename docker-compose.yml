@@ -1,0 +1,15 @@
+version: "3"
+services:
+   buchling_backend:
+     build: ./backend
+     restart: always
+     container_name: buchling_backend
+     ports:
+       - 3012:8000
+     depends_on: 
+       - buchling_database
+
+   buchling_database:
+     image: mongo
+     container_name: buchling_database
+     restart: always

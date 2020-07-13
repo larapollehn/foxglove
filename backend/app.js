@@ -1,13 +1,11 @@
 "use strict";
+
 const express = require("express");
 const mongoose = require("mongoose");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const expressValidator = require("express-validator");
-const cors = require("cors");
-require("dotenv")
-  .config();
 
 const log = require("./src/utils/Logger");
 const authRoutes = require("./src/routes/auth");
@@ -16,16 +14,17 @@ const categoryRoutes = require("./src/routes/category");
 const productRoutes = require("./src/routes/product");
 
 // env
-const database = process.env.DATABASE;
+const DATABASE = process.env.DATABASE;
 
 // db
-mongoose.connect(database, {
+mongoose.connect(DATABASE, {
   useNewUrlParser: true,
   useCreateIndex: true
-})
-  .then(() => {
-    log.debug("Database connection established");
-  });
+}).then(() => {
+    log.debug("Database connection established with", DATABASE);
+}).catch((error) => {
+  log.error(`Database connection to ${DATABASE} not be established`, error)
+});
 
 // app
 const app = express();
@@ -35,7 +34,6 @@ app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(expressValidator());
-app.use(cors());
 app.use("/api", authRoutes);
 app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
