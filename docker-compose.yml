@@ -19,4 +19,11 @@ services:
   buchling_database:
     image: mongo
     container_name: buchling_database
+    restart: always
+    volumes:
+    - buchling-data:/data/db
+    
+volumes:
+  buchling-data:
+
 
