@@ -1,5 +1,7 @@
 import React from "react";
 
-const Home = () => <div>Home</div>;
+import Layout from "./Layout";
+
+const Home = () => <div><Layout title="Home Page" description="MERN Stack app" /></div>;
 
 export default Home;
