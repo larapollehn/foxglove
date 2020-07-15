@@ -34,7 +34,6 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.4.0",
     "eslint-config-react-app": "^5.2.1"
   }
 }
