@@ -10,7 +10,7 @@ const { requireSignin, isAuth, isAdmin } = require("../controllers/auth");
 
 router.get("/category/:categoryId", getCategory);
 router.get("/category", listAllCategories);
-router.post("/category/create/:userId", requireSignin, isAuth, isAdmin, create);
+router.post("/category/create/:userId", create);
 router.put("/category/:userId/:categoryId", updateCategory);
 router.delete("/category/:userId/:categoryId", removeCategory);
 
