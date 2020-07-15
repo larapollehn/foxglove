@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import Layout from "../base/Layout";
 import log from "../utils/Logger";
 import axios from "axios";
@@ -55,7 +56,7 @@ const Registration = () => {
 
     const showSuccess = () => (
         <div className="alert alert-success" role="alert" style={{display: success ? '' : "none"}}>
-            User account was successfully created. You can login now.
+            User account was successfully created. You can <Link to="/singin">Login</Link> now.
         </div>
     );
 
@@ -86,7 +87,6 @@ const Registration = () => {
                 {showSuccess()}
                 {showError()}
                 {registrationForm()}
-                {JSON.stringify(values)}
             </Layout>
         </div>
     )
