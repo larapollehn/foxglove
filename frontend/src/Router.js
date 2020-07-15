@@ -1,13 +1,17 @@
 import React from "react";
 import {BrowserRouter, Switch, Route} from "react-router-dom";
 
-import Registration from "./Registration";
-import Login from "./Login";
+import Registration from "./user/Registration";
+import Login from "./user/Login";
+import Home from "./base/Home";
+import Navbar from "./base/Navbar";
 
-const UserRouter = () => {
+const Router = () => {
     return (
         <BrowserRouter>
+            <Navbar/>
             <Switch>
+                <Route path="/" exact component={Home}/>
                 <Route path="/signin" exact component={Login}/>
                 <Route path="/signup" exact component={Registration}/>
             </Switch>
@@ -15,4 +19,4 @@ const UserRouter = () => {
     )
 }
 
-export default UserRouter;
+export default Router;
