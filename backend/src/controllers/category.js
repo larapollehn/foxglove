@@ -61,7 +61,7 @@ exports.updateCategory = (req, res) => {
   category.save((err, data) => {
     if (err) {
       return res.status(400)
-        .json({ error: "Category could not be removed" });
+        .json({ error: "Category could not be updated" });
     }
     return res.json({ data });
   });
