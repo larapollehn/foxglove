@@ -41,10 +41,10 @@ const Registration = () => {
             }
         }).then((response) => {
             log.debug("User registration successful.", response.data);
-            setValues({...values, name: "", email: "", password: "", error: "", loading: true})
+            setValues({...values, name: "", email: "", password: "", error: "", success: true})
         }).catch((error) => {
             log.debug("Failed: User registration.", error.response.data);
-            setValues({...values, error: error.response.data, loading: false});
+            setValues({...values, error: error.response.data, success: false});
         })
     };
 
@@ -56,7 +56,7 @@ const Registration = () => {
 
     const showSuccess = () => (
         <div className="alert alert-success" role="alert" style={{display: success ? '' : "none"}}>
-            User account was successfully created. You can <Link to="/singin">Login</Link> now.
+            User account was successfully created. You can <Link to="/signin">Login</Link> now.
         </div>
     );
 

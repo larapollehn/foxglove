@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Layout from "../base/Layout";
 import log from "../utils/Logger";
 import axios from "axios";
-import {Link, Redirect} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 /**
  * https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/auth/post_signin
@@ -82,8 +82,8 @@ const Login = () => {
     return (
         <div>
             <Layout
-                title="Registration"
-                description="To start going on book adventures create a user account"
+                title="Login"
+                description="Login to your user account please."
                 className="container col-md-8 offset-md-2">
                 {showError()}
                 {showLoading()}
