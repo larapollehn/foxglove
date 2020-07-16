@@ -13,14 +13,6 @@ const isActive = (history, path) => {
     }
 }
 
-const isHome = (history) => {
-    if(history.location.pathname === "/"){
-        return {display: "block"};
-    } else {
-        return {display: "none"};
-    }
-}
-
 /**
  * https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/auth/get_signout
  */
@@ -52,22 +44,43 @@ const Navbar = ({history}) => {
                         aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav ml-auto">
-                        <li className="nav-item active">
-                            <Link className="nav-link" style={isActive(history, "/")} to="/">Home</Link>
-                        </li>
-                        <li className="nav-item active">
-                            <Link className="nav-link" style={isActive(history, "/signin")} to="/signin">Login</Link>
-                        </li>
-                        <li className="nav-item active">
-                            <Link className="nav-link" style={isActive(history, "/signup")} to="/signup">Registration</Link>
-                        </li>
-                        <li className="nav-item active" style={isHome(history)}>
-                            <Link className="nav-link" to="/" onClick={logout}>Logout</Link>
-                        </li>
-                    </ul>
-                </div>
+
+                {/*checks if user is authenticated/logged in based on the existence of the jwt token
+                if user is authenticated only show specific nav options*/}
+                {localStorageManager.getUser() && (
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <Link className="nav-link" style={isActive(history, "/")} to="/">Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" style={isActive(history, "/dashboard")} to="/dashboard">Dashboard</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/" onClick={logout}>Logout</Link>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+
+                {/*checks if user is authenticated/logged in based on the existence of the jwt token
+                if user is authenticated only show specific nav options */}
+                {!localStorageManager.getUser() && (
+                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul className="navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <Link className="nav-link" style={isActive(history, "/")} to="/">Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" style={isActive(history, "/signin")} to="/signin">Login</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" style={isActive(history, "/signup")} to="/signup">Registration</Link>
+                            </li>
+                        </ul>
+                    </div>
+                )}
+
             </nav>
         </div>
     )
