@@ -30,7 +30,7 @@ exports.signin = (req, res) => {
     if (err || !user) {
       return res.status(400)
         .json({
-          error: "Auth with that email does not exist. Please signup",
+          error: "User with that email does not exist. Please register an account first.",
         });
     }
     if (!user.authenticate(password)) {

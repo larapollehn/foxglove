@@ -1,8 +1,11 @@
 import React, {useState} from "react";
 import Layout from "../base/Layout";
-import log from "../utils/Logger";
 import axios from "axios";
 import {Redirect} from "react-router-dom";
+
+import log from "../utils/Logger";
+import localStorageManager from "../utils/LocalStorageManager";
+
 
 /**
  * https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/auth/post_signin
@@ -40,10 +43,11 @@ const Login = () => {
             }
         }).then((response) => {
             log.debug("User login successful.", response.data);
+            localStorageManager.saveUser(response.data);
             setValues({...values, redirectTo: true})
         }).catch((error) => {
-            log.debug("Failed: User login.", error.stack);
-            //setValues({...values, error: error, loading: false});
+            log.debug("Failed: User login.", error.response.data.error);
+            setValues({...values, error: error.response.data.error, loading: false});
         })
     };
 
