@@ -7,6 +7,7 @@ import Home from "./base/Home";
 import Navbar from "./base/Navbar";
 import Dashboard from "./user/Dashboard";
 import localStorageManager from "./utils/LocalStorageManager";
+import AdminDashboard from "./user/AdminDashboard";
 
 const Router = () => {
     return (
@@ -17,6 +18,7 @@ const Router = () => {
                 <Route path="/signin" exact component={Login}/>
                 <Route path="/signup" exact component={Registration}/>
                 <ProtectedRoute path="/user/dashboard" exact component={Dashboard}/>
+                <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
             </Switch>
         </BrowserRouter>
     )
@@ -31,6 +33,23 @@ const ProtectedRoute = ({component: Component, ...rest}) => (
         {...rest}
         render={props =>
             localStorageManager.getUser() ? (
+                <Component {...props} />
+            ) : (
+                <Redirect to={{pathname: "/signin", state: {from: props.location}}}/>
+            )
+        }
+    />
+)
+
+/**
+ * Route that only renders given Component if user is logged in
+ * redirects to login page if not
+ */
+const AdminRoute = ({component: Component, ...rest}) => (
+    <Route
+        {...rest}
+        render={props =>
+            localStorageManager.getUser() && localStorageManager.getUser().user.role === 1 ? (
                 <Component {...props} />
             ) : (
                 <Redirect to={{pathname: "/signin", state: {from: props.location}}}/>

@@ -53,9 +53,17 @@ const Navbar = ({history}) => {
                             <li className="nav-item">
                                 <Link className="nav-link" style={isActive(history, "/")} to="/">Home</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" style={isActive(history, "/user/dashboard")} to="/user/dashboard">Dashboard</Link>
-                            </li>
+                            {localStorageManager.getUser() && localStorageManager.getUser().user.role === 0 && (
+                                <li className="nav-item">
+                                    <Link className="nav-link" style={isActive(history, "/user/dashboard")} to="/user/dashboard">Dashboard</Link>
+                                </li>
+                            )}
+                            {localStorageManager.getUser() && localStorageManager.getUser().user.role === 1 && (
+                                <li className="nav-item">
+                                    <Link className="nav-link" style={isActive(history, "/admin/dashboard")} to="/admin/dashboard">Dashboard</Link>
+                                </li>
+                            )}
+
                             <li className="nav-item">
                                 <Link className="nav-link" to="/" onClick={logout}>Logout</Link>
                             </li>
