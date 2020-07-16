@@ -6,13 +6,18 @@ class LocalStorageManager{
     }
 
     saveUser(data){
-        log.debug("User token saved as jwt in localstorage")
+        log.debug("User token saved as jwt in localstorage");
         localStorage.setItem(this.key, JSON.stringify(data));
     }
 
     getUser(){
-        log.debug("User token retrieved from localstorage")
+        log.debug("User token retrieved from localstorage");
         return localStorage.getItem(this.key);
+    }
+
+    removeUser(){
+        log.debug("User token was removed from localstorage");
+        localStorage.removeItem(this.key);
     }
 }
 

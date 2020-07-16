@@ -60,7 +60,7 @@ exports.signin = (req, res) => {
 exports.signout = (req, res) => {
   log.debug("User signed out and token in cookie is cleared");
   res.clearCookie("t");
-  res.json({ message: "Auth signed out" });
+  res.json({ message: "User signed out." });
 };
 
 // Middleware

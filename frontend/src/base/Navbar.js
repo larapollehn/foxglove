@@ -1,12 +1,39 @@
 import React from "react";
 import {Link, withRouter} from "react-router-dom";
+import axios from "axios";
+
+import log from "../utils/Logger";
+import localStorageManager from "../utils/LocalStorageManager";
 
 const isActive = (history, path) => {
     if(history.location.pathname === path){
-        return {color: "#0073ff"}
+        return {color: "#0073ff"};
     } else {
-        return {color: "#5a5855"}
+        return {color: "#5a5855"};
     }
+}
+
+const isHome = (history) => {
+    if(history.location.pathname === "/"){
+        return {display: "block"};
+    } else {
+        return {display: "none"};
+    }
+}
+
+/**
+ * https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/auth/get_signout
+ */
+const logout = () => {
+    localStorageManager.removeUser();
+    axios({
+        method: 'GET',
+        url: "api/signout"
+    }).then((response) => {
+        log.debug("User signed out, cookie was cleared.", response.data);
+    }).catch((error) => {
+        log.debug("User could not be signed out, cookie was not deleted", error.response.message);
+    })
 }
 
 /**
@@ -35,6 +62,9 @@ const Navbar = ({history}) => {
                         </li>
                         <li className="nav-item active">
                             <Link className="nav-link" style={isActive(history, "/signup")} to="/signup">Registration</Link>
+                        </li>
+                        <li className="nav-item active" style={isHome(history)}>
+                            <Link className="nav-link" to="/" onClick={logout}>Logout</Link>
                         </li>
                     </ul>
                 </div>
