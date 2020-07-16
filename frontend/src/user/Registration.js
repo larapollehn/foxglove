@@ -41,10 +41,10 @@ const Registration = () => {
             }
         }).then((response) => {
             log.debug("User registration successful.", response.data);
-            setValues({...values, name: "", email: "", password: "", error: "", success: true})
+            setValues({...values, name: "", email: "", password: "", error: "", loading: true})
         }).catch((error) => {
             log.debug("Failed: User registration.", error.response.data);
-            setValues({...values, error: error.response.data, success: false});
+            setValues({...values, error: error.response.data, loading: false});
         })
     };
 
