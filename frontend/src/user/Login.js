@@ -20,6 +20,7 @@ const Login = () => {
     });
 
     const {email, password, error, loading, redirectTo} = values;
+    const {user} = localStorageManager.getUser();
 
     // the following is the arrow version of a higher order function
     const handleChange = targetValue => event => {
@@ -65,7 +66,11 @@ const Login = () => {
 
     const redirectUser = () => {
         if(redirectTo) {
-            return <Redirect to="/"/>
+            if(user && user.role === 1){
+                return <Redirect to="/admin/dashboard"/>
+            } else {
+                return <Redirect to="/user/dashboard"/>
+            }
         }
     };
 
