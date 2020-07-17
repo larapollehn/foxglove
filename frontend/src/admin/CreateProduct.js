@@ -133,6 +133,7 @@ const CreateProduct = () => {
                 description="Create as many new products as needed."
                 className="container col-md-8 offset-md-2">
                 {showError()}
+                {showSuccess()}
                 {newProductForm()}
             </Layout>
         </div>

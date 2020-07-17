@@ -11,7 +11,6 @@ import log from "../utils/Logger";
  */
 const Home = () => {
     const [soldProducts, setSoldProducts] = useState([]);
-    const [error, setError] = useState(false);
 
     useEffect(() => {
         getSoldProducts();
@@ -40,8 +39,8 @@ const Home = () => {
                 {soldProducts.map((product, i) => (
                     <div className="col-4 mb-3" key={i}>
                         <div className="card" key={i}>
-                            {showImage(product)}
                             <div className="card-header">{product.name}</div>
+                            {showImage(product)}
                             <div className="card-body">
                                 <p className="card-text">{product.description}</p>
                                 <p>{product.price}€</p>

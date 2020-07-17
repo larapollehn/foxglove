@@ -74,7 +74,7 @@ exports.updateCategory = (req, res) => {
  */
 exports.listAllCategories = (req, res) => {
   log.debug("List all categories");
-  Category.find()
+  Category.distinct("name")
     .exec((err, category) => {
       if (err || !category) {
         return res.status(400)

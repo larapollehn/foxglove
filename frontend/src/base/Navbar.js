@@ -53,6 +53,9 @@ const Navbar = ({history}) => {
                             <li className="nav-item">
                                 <Link className="nav-link" style={isActive(history, "/")} to="/">Home</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" style={isActive(history, "/shop")} to="/shop">Shop</Link>
+                            </li>
                             {localStorageManager.getUser() && localStorageManager.getUser().user.role === 0 && (
                                 <li className="nav-item">
                                     <Link className="nav-link" style={isActive(history, "/user/dashboard")} to="/user/dashboard">Dashboard</Link>
@@ -78,6 +81,9 @@ const Navbar = ({history}) => {
                         <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
                                 <Link className="nav-link" style={isActive(history, "/")} to="/">Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" style={isActive(history, "/shop")} to="/shop">Shop</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" style={isActive(history, "/signin")} to="/signin">Login</Link>
