@@ -74,7 +74,7 @@ exports.updateCategory = (req, res) => {
  */
 exports.listAllCategories = (req, res) => {
   log.debug("List all categories");
-  Category.distinct("name")
+  Category.aggregate([{$group: {_id: "$name", the_id: {$first: "$_id"}}}])
     .exec((err, category) => {
       if (err || !category) {
         return res.status(400)
@@ -83,3 +83,5 @@ exports.listAllCategories = (req, res) => {
       return res.json({ category });
     });
 };
+
+//db.categories.aggregate([{$group: {_id: "$name", id: {$first: "$_id"}}}])

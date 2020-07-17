@@ -6,6 +6,11 @@ import log from "../utils/Logger";
 
 const Shop = () => {
     const [categories, setCategories] = useState([]);
+    const [checked, setChecked] = useState([]);
+
+    const handleToggle = checkedCategory => () => {
+
+    }
 
     useEffect(() => {
         listAllCategories();
@@ -36,7 +41,7 @@ const Shop = () => {
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
                         <li className="list-unstyled" key={i}>
-                            <input type="checkbox" className="form-check-input"/>
+                            <input onChange={handleToggle()} type="checkbox" className="form-check-input"/>
                             <label className="form-check-label">{category}</label>
                         </li>
                         )
