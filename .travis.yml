@@ -9,10 +9,8 @@ before_script:
 script:
 - cd ./backend
 - npm install
-- npm run lint
 - cd .. && cd ./frontend
 - npm install
-- npm run lint
 - cd ..
 - openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d
 - chmod 0600 deploy_rsa
