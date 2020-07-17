@@ -15,13 +15,10 @@ const CreateProduct = () => {
         price: "",
         categories: [],
         category: "",
-        shipping: "",
         quantity: "",
-        photo: "",
         error: "",
-        loading: false,
+        success: false,
         createdProduct: "",
-        redirectToProfile: false,
         formData: ""
     });
 
@@ -34,7 +31,7 @@ const CreateProduct = () => {
         quantity,
         error,
         createdProduct,
-        redirectToProfile,
+        success,
         formData
     } = values;
 
@@ -55,7 +52,7 @@ const CreateProduct = () => {
 
     const submitProduct = (event) => {
         event.preventDefault();
-        setValues({...values, error: "", loading: true});
+        setValues({...values, error: ""});
         log.debug(formData);
         axios({
             method: 'POST',
@@ -75,17 +72,23 @@ const CreateProduct = () => {
                 photo: "",
                 price: "",
                 quantity: "",
-                loading: false,
+                success: true,
                 createdProduct: response.data.name});
         }).catch((error) => {
             log.debug("New Category could not be created:", error.response.data.error);
-            setValues({...values, error: error.response.data.error})
+            setValues({...values, error: error.response.data.error, success: false})
         })
     }
 
     const showError = () => (
         <div className="alert alert-danger" role="alert" style={{display: error ? '' : "none"}}>
             {error}!
+        </div>
+    );
+
+    const showSuccess = () => (
+        <div className="alert alert-success" role="alert" style={{display: success ? '' : "none"}}>
+            Product "{createdProduct}" was successfully created.
         </div>
     );
 
