@@ -9,6 +9,7 @@ import Dashboard from "./user/Dashboard";
 import localStorageManager from "./utils/LocalStorageManager";
 import AdminDashboard from "./user/AdminDashboard";
 import CreateCategory from "./admin/CreateCategory";
+import CreateProduct from "./admin/CreateProduct";
 
 const Router = () => {
     return (
@@ -21,6 +22,7 @@ const Router = () => {
                 <ProtectedRoute path="/user/dashboard" exact component={Dashboard}/>
                 <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
                 <AdminRoute path="/create/category" exact component={CreateCategory}/>
+                <AdminRoute path="/create/product" exact component={CreateProduct}/>
             </Switch>
         </BrowserRouter>
     )

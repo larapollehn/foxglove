@@ -49,7 +49,7 @@ const CreateCategory = () => {
 
     const showError = () => (
         <div className="alert alert-danger" role="alert" style={{display: error ? '' : "none"}}>
-            {error}!
+            No duplicate categories allowed!
         </div>
     );
 
