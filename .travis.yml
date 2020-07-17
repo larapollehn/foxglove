@@ -6,9 +6,6 @@ services:
 before_script:
 - sleep 15
 - mongo mydb_test --eval 'db.createUser({user:"travis",pwd:"test",roles:["readWrite"]});'
-before_install:
-- openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d
-- chmod 0600 deploy_rsa
 script:
 - cd ./backend
 - npm install
@@ -16,6 +13,8 @@ script:
 - cd .. && cd ./frontend
 - npm install
 - npm run lint
+- openssl aes-256-cbc -K $encrypted_db2095f63ba3_key -iv $encrypted_db2095f63ba3_iv -in deploy_rsa.enc -out deploy_rsa -d
+- chmod 0600 deploy_rsa
 - eval $(ssh-agent -s)
 - ssh-add deploy_rsa
 - ssh -o StrictHostKeyChecking=no lara@larapollehn.de "cd buchling && git pull && docker-compose up -d --build"
