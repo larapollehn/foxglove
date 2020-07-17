@@ -211,3 +211,22 @@ exports.getProductPhoto = (req, res, next) => {
   }
   next();
 };
+
+/**
+ * get the six top selling products to display on home screen
+ * @param req
+ * @param res
+ */
+exports.listAllProducts = (req, res) => {
+  log.debug("List of products was requested");
+  Product.find({sold: {$gt: 0}})
+      .limit(6)
+      .exec((err, products) => {
+        if (err) {
+          return res.status(400)
+              .json({ error: "No Products found" });
+        }
+        log.debug("Sold products were found");
+        return res.json({ products });
+      });
+}
