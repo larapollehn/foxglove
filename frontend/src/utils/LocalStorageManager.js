@@ -19,7 +19,6 @@ class LocalStorageManager{
      * @returns JSON Object containing jwt token and user info
      */
     getUser(){
-        log.debug("User token retrieved from localstorage");
         if(localStorage.getItem(this.key) !== null){
             return JSON.parse(localStorage.getItem(this.key));
         } else {

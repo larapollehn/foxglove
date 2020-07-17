@@ -8,6 +8,7 @@ import Navbar from "./base/Navbar";
 import Dashboard from "./user/Dashboard";
 import localStorageManager from "./utils/LocalStorageManager";
 import AdminDashboard from "./user/AdminDashboard";
+import CreateCategory from "./admin/CreateCategory";
 
 const Router = () => {
     return (
@@ -19,6 +20,7 @@ const Router = () => {
                 <Route path="/signup" exact component={Registration}/>
                 <ProtectedRoute path="/user/dashboard" exact component={Dashboard}/>
                 <AdminRoute path="/admin/dashboard" exact component={AdminDashboard}/>
+                <AdminRoute path="/create/category" exact component={CreateCategory}/>
             </Switch>
         </BrowserRouter>
     )
