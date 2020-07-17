@@ -11,6 +11,7 @@
     "ecmaVersion": 6
   },
   "rules": {
+    "object-curly-spacing": "off",
     "radix": "off",
     "no-restricted-syntax": "off",
     "no-shadow": "off",
