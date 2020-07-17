@@ -9,7 +9,19 @@ const Shop = () => {
     const [checked, setChecked] = useState([]);
 
     const handleToggle = checkedCategory => () => {
+        log.debug("Newly checked category:", checkedCategory);
+        const indexCurrentCategory = checked.indexOf(checkedCategory);
+        const allCheckedCategories = [...checked];
 
+        //is category in list of checked categories remove it, else add
+        if(indexCurrentCategory === -1){
+            allCheckedCategories.push(checkedCategory);
+            log.debug("Added new category to checked. Now:", allCheckedCategories);
+        } else {
+            allCheckedCategories.splice(indexCurrentCategory, 1);
+            log.debug("Removed category in checked. Now:", allCheckedCategories);
+        }
+        setChecked(allCheckedCategories);
     }
 
     useEffect(() => {
@@ -41,8 +53,8 @@ const Shop = () => {
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
                         <li className="list-unstyled" key={i}>
-                            <input onChange={handleToggle()} type="checkbox" className="form-check-input"/>
-                            <label className="form-check-label">{category}</label>
+                            <input onChange={handleToggle(category.the_id)} type="checkbox" className="form-check-input" value={checked.indexOf(category.the_id)}/>
+                            <label className="form-check-label">{category._id}</label>
                         </li>
                         )
                     )}
