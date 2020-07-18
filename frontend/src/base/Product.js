@@ -3,10 +3,11 @@ import axios from "axios";
 
 import Layout from "./Layout";
 import log from "../utils/Logger";
+import {Link} from "react-router-dom";
 
 const Product = (props) => {
     const [product, setProduct] = useState({});
-    const [error, setError] = useState(false);
+    const [relatedProducts, setRelatedProducts] = useState([]);
 
     // https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/product/get_product__productId
     const fetchProduct = productId => {
@@ -20,26 +21,83 @@ const Product = (props) => {
         }).catch((error) => {
             log.debug("Could not fetch product based on productId", error);
         });
-    }
+    };
+
+    // https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/product/get_product_related__productId
+    const fetchRelatedProducts = productId => {
+        axios({
+            method: "GET",
+            url: `/api/product/related/${productId}`
+        }).then((response) => {
+            log.debug("Fetched related products:", response.data);
+            setRelatedProducts(response.data.products);
+        }).catch((error) => {
+            log.debug("Could not fetch related Products", error);
+        })
+    };
 
     const showImage = (product) => (
         <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
-    )
+    );
+
+    const showRelatedProducts = () => {
+        if(relatedProducts && relatedProducts.length > 0){
+            return(
+                relatedProducts.map((product, i) => (
+                    <div className="card" key={i}>
+                        <div className="card-header">{product.name}</div>
+                        {showImage(product)}
+                        <div className="card-body">
+                            <p className="card-text">{product.description}...</p>
+                            <p>{product.price}€</p>
+                            <p>{product.quantity} books left</p>
+                            <Link to={`/product/${product._id}`}>
+                                <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
+                            </Link>
+                            <Link to="/">
+                                <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                            </Link>
+                        </div>
+                    </div>
+                ))
+            )
+        }
+    }
 
     useEffect(() => {
         const productId = props.match.params.productId;
         log.debug("productId", productId);
         fetchProduct(productId);
-    }, []);
+        fetchRelatedProducts(productId);
+    }, [props]);
 
     return (
         <Layout
-            title="Product Spotlight"
-            description="Buy the book now!"
+            title={product.name}
+            description={product.description}
             className="container"
         >
-            <p>Product Page</p>
-            {JSON.stringify(product)}
+            <div className="row">
+                <div className="card">
+                    <div className="card-header">{product.name}</div>
+                    {showImage(product)}
+                    <div className="card-body">
+                        <p className="card-text">{product.description}...</p>
+                        <p>{product.price}€</p>
+                        <p>{product.quantity} books left</p>
+                        <Link to="/">
+                            <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+            {relatedProducts.length > 0 &&(
+                <h4>Related products you might also like</h4>
+            )}
+            <div className="row">
+                {showRelatedProducts()}
+            </div>
+
         </Layout>
     )
 }
