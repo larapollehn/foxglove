@@ -37,10 +37,10 @@ const Search = () => {
         log.debug("User searches for product, (category, search input)", category, search);
         axios({
             method: "POST",
-            url: "/api/product/search",
+            url: "/api/products/search",
             data:{
                 category: category,
-                search: search ? search : undefined
+                search: search
             }
         }).then((response) => {
             log.debug("Products matching search", response.data);
