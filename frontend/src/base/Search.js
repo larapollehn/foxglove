@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 
 import log from "../utils/Logger";
+import {Link} from "react-router-dom";
 
 const Search = () => {
     const [data, setData] = useState({
@@ -44,7 +45,7 @@ const Search = () => {
             }
         }).then((response) => {
             log.debug("Products matching search", response.data);
-            //setData({...data, results: response.data,, searched: true});
+            setData({...data, results: response.data.products, searched: true});
         }).catch((error) => {
             log.debug("Could not find products matching the search", error);
         })
@@ -54,16 +55,6 @@ const Search = () => {
         <form>
             <span className="input-group-text">
                 <div className="input-group input-group-lg">
-                    <div className="input-group-prepend">
-                        <select className="btn mr-2" onChange={handleChange("category")}>
-                            <option value="All">Pick Category</option>
-                            {
-                                categories.map((category, i) => (
-                                    <option key={i} value={category.the_id}>{category._id}</option>
-                                ))
-                            }
-                        </select>
-                    </div>
                     <input type="search" className="form-control" onChange={handleChange("search")}
                            placeholder="Search by name..."/>
                     <button onClick={searchByUserInput}>Search</button>
@@ -73,6 +64,10 @@ const Search = () => {
         </form>
     )
 
+    const showImage = (product) => (
+        <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
+    )
+
     useEffect(() => {
         listAllCategories()
     }, [])
@@ -80,7 +75,25 @@ const Search = () => {
     return (
         <div className="row">
             <div className="container">{searchForm()}</div>
-            {JSON.stringify(results)}
+            <div className="row">
+                {results.map((product, i) => (
+                    <div className="card" key={i}>
+                        <div className="card-header">{product.name}</div>
+                        {showImage(product)}
+                        <div className="card-body">
+                            <p className="card-text">{product.description.substring(0,50)}...</p>
+                            <p>{product.price}€</p>
+                            <p>{product.quantity} books left</p>
+                            <Link to="/">
+                                <button className="btn btn-outline-primary mt-2 mb-2">View Button</button>
+                            </Link>
+                            <Link to="/">
+                                <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                            </Link>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
