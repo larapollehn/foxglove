@@ -154,7 +154,10 @@ exports.listProductCategories = (req, res) => {
  * @param res
  */
 exports.listBySearch = (req, res) => {
-    log.debug(req.body);
+    log.debug(req);
+    log.debug(req.body.order);
+    log.debug(req.body.limit);
+    log.debug(req.body.skip);
     const order = req.body.order ? req.body.order : "desc";
     const sortBy = req.body.sortBy ? req.body.sortBy : "_id";
     const limit = req.body.limit ? parseInt(req.body.limit) : 100;
@@ -181,7 +184,6 @@ exports.listBySearch = (req, res) => {
     }
 
     log.debug("Products in range should have the args:", findArgs);
-    log.error("BE", findArgs);
     Product.find(findArgs)
         .select("-photo")
         .populate("category")
