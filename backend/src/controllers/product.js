@@ -154,13 +154,17 @@ exports.listProductCategories = (req, res) => {
  * @param res
  */
 exports.listBySearch = (req, res) => {
+    log.debug(req.body);
     const order = req.body.order ? req.body.order : "desc";
     const sortBy = req.body.sortBy ? req.body.sortBy : "_id";
     const limit = req.body.limit ? parseInt(req.body.limit) : 100;
+    // skip decides how many products are skipped when being fetched
+    // needed for "load more books" in shop page
     const skip = parseInt(req.body.skip);
     const findArgs = {};
     log.debug("Product was searched by user:", order, sortBy, limit);
 
+    log.debug("Filters in request body:", req.body.filters);
     for (const key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
             if (key === "price") {
@@ -177,6 +181,7 @@ exports.listBySearch = (req, res) => {
     }
 
     log.debug("Products in range should have the args:", findArgs);
+    log.error("BE", findArgs);
     Product.find(findArgs)
         .select("-photo")
         .populate("category")
