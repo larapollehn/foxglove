@@ -157,8 +157,8 @@ exports.listBySearch = (req, res) => {
     const order = req.body.order ? req.body.order : "desc";
     const sortBy = req.body.sortBy ? req.body.sortBy : "_id";
     const limit = req.body.limit ? parseInt(req.body.limit) : 100;
-    const price_top = req.body.price_top ? req.body.price_top : 0;
-    const price_bottom = req.body.price_bottom ? req.body.price_bottom : 100;
+    const price_top = req.body.price_top ? req.body.price_top : 100;
+    const price_bottom = req.body.price_bottom ? req.body.price_bottom : 0;
     const categories = req.body.category ? req.body.category : [];
     // skip decides how many products are skipped when being fetched
     // needed for "load more books" in shop page
