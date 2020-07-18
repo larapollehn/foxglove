@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import log from "../utils/Logger";
 import {prices} from "./helpers";
 import localStorageManager from "../utils/LocalStorageManager";
+import {Link} from "react-router-dom";
 
 const Shop = () => {
     const {user, token} = localStorageManager.getUser();
@@ -14,6 +15,7 @@ const Shop = () => {
     const [skip, setSkip] = useState(0);
     const [limit, setLimit] = useState(6);
     const [filteredProducts, setFilteredProducts] = useState([]);
+    const [productAmount, setProductAmount] = useState(0);
 
     const handleCategoryToggle = checkedCategory => () => {
         log.debug("Newly checkedCategories category:", checkedCategory);
@@ -55,8 +57,9 @@ const Shop = () => {
                 category: checkedCategories
             }
         }).then((response) => {
-            log.debug("Products were fetched", response.data);
-            setFilteredProducts(response.data);
+            log.debug("Products were fetched", response.data.data);
+            setFilteredProducts(response.data.data);
+            setProductAmount(response.data.size);
         }).catch((error) => {
             log.debug("Products could not be fetched", error.response.data);
         })
@@ -77,9 +80,16 @@ const Shop = () => {
             log.debug("Could not fetch list of categories", error.message);
         })
     };
+
+
     useEffect(() => {
+        fetchProducts();
         listAllCategories();
     }, []);
+
+    const showImage = (product) => (
+        <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
+    )
 
     return (
         <Layout
@@ -107,7 +117,28 @@ const Shop = () => {
                     )}
                     <button onClick={fetchProducts} className="btn btn-primary">Apply Filters</button>
                 </div>
-                <div className="col-8">Right Side
+                <div className="col-8">
+                    <h2>Products</h2>
+                    <p>Available Products: {productAmount}</p>
+                    <div className="row">
+                        {filteredProducts.map((product, i) => (
+                            <div className="card" key={i}>
+                                <div className="card-header">{product.name}</div>
+                                {showImage(product)}
+                                <div className="card-body">
+                                    <p className="card-text">{product.description}</p>
+                                    <p>{product.price}€</p>
+                                    <p>{product.quantity} books left</p>
+                                    <Link to="/">
+                                        <button className="btn btn-outline-primary mt-2 mb-2">View Button</button>
+                                    </Link>
+                                    <Link to="/">
+                                        <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </Layout>
