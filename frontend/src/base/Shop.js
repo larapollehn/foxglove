@@ -4,14 +4,18 @@ import axios from "axios";
 import Layout from "./Layout";
 import log from "../utils/Logger";
 import {prices} from "./helpers";
+import localStorageManager from "../utils/LocalStorageManager";
 
 const Shop = () => {
+    const {user, token} = localStorageManager.getUser();
     const [categories, setCategories] = useState([]);
     const [checked, setChecked] = useState([]);
-    const [priceRange, setPriceRange] = useState([]);
     const [filters, setFilters] = useState({
         filters: {category: [], price: []}
     });
+    const [skip, setSkip] = useState(0);
+    const [limit, setLimit] = useState(6);
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     const handleCategoryToggle = checkedCategory => () => {
         log.debug("Newly checked category:", checkedCategory);
@@ -42,9 +46,30 @@ const Shop = () => {
         setFilters(categoryFilter);
     }
 
-    useEffect(() => {
-        listAllCategories();
-    }, []);
+    // https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/product/post_product_by_search
+    const fetchProducts = () => {
+        log.debug("Current args for fetching products: (skip, limit, filters)", skip, limit, filters);
+        axios({
+            method: 'POST',
+            url: "/api/product/by/search",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`
+            },
+            data: {
+                skip: skip,
+                limit: limit,
+                filters: filters
+            }
+        }).then((response) => {
+            log.debug("Products were fetched", response.data);
+            setFilteredProducts(response.data);
+        }).catch((error) => {
+            log.debug("Products could not be fetched", error.response.data);
+        })
+    }
+
 
     // lists all distinct categories
     // _id has the names as values and the_id is the actual id
@@ -60,6 +85,9 @@ const Shop = () => {
             log.debug("Could not fetch list of categories", error.message);
         })
     };
+    useEffect(() => {
+        listAllCategories();
+    }, []);
 
     return (
         <Layout
@@ -85,6 +113,7 @@ const Shop = () => {
                             </li>
                         )
                     )}
+                    <button onClick={fetchProducts} className="btn btn-primary">Apply Filters</button>
                 </div>
                 <div className="col-8">Right Side
                     {JSON.stringify(filters)}

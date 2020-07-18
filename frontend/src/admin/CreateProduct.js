@@ -36,7 +36,7 @@ const CreateProduct = () => {
     } = values;
 
     useEffect(() => {
-        setValues({...values, formData: new FormData()});
+        setValues({...values, formData: new FormData(), error: false, success: false});
     }, []);
 
     const handleChange = targetValue => event => {
@@ -88,7 +88,7 @@ const CreateProduct = () => {
 
     const showSuccess = () => (
         <div className="alert alert-success" role="alert" style={{display: success ? '' : "none"}}>
-            Product "{createdProduct}" was successfully created.
+            Product was successfully created.
         </div>
     );
 
