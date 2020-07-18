@@ -236,8 +236,9 @@ exports.listAllProducts = (req, res) => {
 exports.searchByUserInput = (req, res) => {
     const category = req.body.category;
     const searchString = req.body.search;
-    log.debug("Products based on users search is requested, (category, searchString)", category, searchString);
-    Product.find({name: {$regex: `/${searchString}$/`}})
+    let val = `.*${searchString}.*`;
+    log.debug("Products based on users search is requested, (category, searchString, val)", category, searchString, val);
+    Product.find({name: new RegExp(val)})
         .exec((err, products) => {
             if (err) {
                 return res.status(400)
