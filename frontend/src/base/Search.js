@@ -39,7 +39,7 @@ const Search = () => {
         axios({
             method: "POST",
             url: "/api/products/search",
-            data:{
+            data: {
                 category: category,
                 search: search
             }
@@ -68,31 +68,42 @@ const Search = () => {
         <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
     )
 
+    const searchMessage = () => {
+        if (searched && results.length > 0) {
+            return `Found ${results.length} products that match your search`;
+        } else if (searched && results.length < 1) {
+            return "No Products found";
+        }
+    }
+
     useEffect(() => {
         listAllCategories()
     }, [])
 
     return (
         <div className="row">
-            <div className="container">{searchForm()}</div>
-            <div className="row">
-                {results.map((product, i) => (
-                    <div className="card" key={i}>
-                        <div className="card-header">{product.name}</div>
-                        {showImage(product)}
-                        <div className="card-body">
-                            <p className="card-text">{product.description.substring(0,50)}...</p>
-                            <p>{product.price}€</p>
-                            <p>{product.quantity} books left</p>
-                            <Link to="/">
-                                <button className="btn btn-outline-primary mt-2 mb-2">View Button</button>
-                            </Link>
-                            <Link to="/">
-                                <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
-                            </Link>
+            <div className="container">
+                {searchForm()}
+                <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
+                <div className="row">
+                    {results.map((product, i) => (
+                        <div className="card" key={i}>
+                            <div className="card-header">{product.name}</div>
+                            {showImage(product)}
+                            <div className="card-body">
+                                <p className="card-text">{product.description.substring(0, 50)}...</p>
+                                <p>{product.price}€</p>
+                                <p>{product.quantity} books left</p>
+                                <Link to={`/product/${product._id}`}>
+                                    <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
+                                </Link>
+                                <Link to="/">
+                                    <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     )

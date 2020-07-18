@@ -47,8 +47,8 @@ const Home = () => {
                                 <p className="card-text">{product.description}</p>
                                 <p>{product.price}€</p>
                                 <p>{product.quantity} books left</p>
-                                <Link to="/">
-                                    <button className="btn btn-outline-primary mt-2 mb-2">View Button</button>
+                                <Link to={`/product/${product._id}`}>
+                                    <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
                                 </Link>
                                 <Link to="/">
                                     <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
