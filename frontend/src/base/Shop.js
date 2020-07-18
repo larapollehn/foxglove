@@ -13,7 +13,7 @@ const Shop = () => {
     const [checkedCategories, setCheckedCategories] = useState([]);
     const [priceRange, setPriceRange] = useState([]);
     const [skip, setSkip] = useState(0);
-    const [limit, setLimit] = useState(6);
+    const [limit, setLimit] = useState(4);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [productAmount, setProductAmount] = useState(0);
 
@@ -51,7 +51,6 @@ const Shop = () => {
             },
             data: {
                 skip: skip,
-                limit: limit,
                 price_bottom: priceRange[0],
                 price_top: priceRange[1],
                 category: checkedCategories
@@ -60,11 +59,25 @@ const Shop = () => {
             log.debug("Products were fetched", response.data.data);
             setFilteredProducts(response.data.data);
             setProductAmount(response.data.size);
+            setSkip(0);
         }).catch((error) => {
             log.debug("Products could not be fetched", error.response.data);
         })
     }
 
+    const loadMoreButton = () => {
+      return(
+          productAmount > 0 && productAmount >= limit && (
+          <button className="btn btn-primary" onClick={loadMore}>Load More</button>
+          )
+      )
+    }
+
+    const loadMore = (event) => {
+        event.preventDefault();
+        const newLimit = limit *2;
+        setLimit(newLimit);
+    }
 
     // lists all distinct categories
     // _id has the names as values and the_id is the actual id
@@ -121,12 +134,12 @@ const Shop = () => {
                     <h2>Products</h2>
                     <p>Available Products: {productAmount}</p>
                     <div className="row">
-                        {filteredProducts.map((product, i) => (
+                        {filteredProducts.slice(0, limit).map((product, i) => (
                             <div className="card" key={i}>
                                 <div className="card-header">{product.name}</div>
                                 {showImage(product)}
                                 <div className="card-body">
-                                    <p className="card-text">{product.description}</p>
+                                    <p className="card-text">{product.description.substring(0,50)}...</p>
                                     <p>{product.price}€</p>
                                     <p>{product.quantity} books left</p>
                                     <Link to="/">
@@ -139,6 +152,7 @@ const Shop = () => {
                             </div>
                         ))}
                     </div>
+                    {loadMoreButton()}
                 </div>
             </div>
         </Layout>
