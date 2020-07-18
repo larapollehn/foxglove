@@ -154,8 +154,6 @@ exports.listProductCategories = (req, res) => {
  * @param res
  */
 exports.listBySearch = (req, res) => {
-    log.debug(req);
-    log.debug(req.body.order);
     log.debug(req.body.limit);
     log.debug(req.body.skip);
     const order = req.body.order ? req.body.order : "desc";
@@ -168,6 +166,15 @@ exports.listBySearch = (req, res) => {
     log.debug("Product was searched by user:", order, sortBy, limit);
 
     log.debug("Filters in request body:", req.body.filters);
+    const filters = req.body.filters;
+    const priceRange = filters.price;
+    const bottomPrice = priceRange[0];
+    const topPrice = priceRange[1];
+    const category = filters.category[0];
+    log.debug("bottomPrice", bottomPrice);
+    log.debug("topPrice", topPrice);
+    log.debug("category", category);
+
     for (const key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
             if (key === "price") {
