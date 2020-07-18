@@ -172,10 +172,6 @@ exports.listBySearch = (req, res) => {
         $lte: price_top,
     };
 
-    for (const category of categories){
-        findArgs["category"] = `ObjectId("${category}")`;
-    }
-
     log.debug("Products in range should have the args:", findArgs);
 
     Product.find(findArgs)
