@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 
 import Layout from "./Layout";
 import log from "../utils/Logger";
+import Search from "./Search";
 
 
 /**
@@ -35,6 +36,7 @@ const Home = () => {
     return (
         <div>
             <Layout title="Home Page" description="MERN Stack app">
+                <Search/>
                 <h2 className="mb-4">Best Sellers</h2>
                 {soldProducts.map((product, i) => (
                     <div className="col-4 mb-3" key={i}>
