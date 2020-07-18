@@ -15,7 +15,7 @@ const Product = (props) => {
         axios({
             method: "GET",
             url: `/api/product/${productId}`
-        }).then((response) =>{
+        }).then((response) => {
             log.debug("Fetched Product:", response.data);
             setProduct(response.data);
         }).catch((error) => {
@@ -40,9 +40,35 @@ const Product = (props) => {
         <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
     );
 
+    const availability = (product) => {
+        if (product.quantity >= 1) {
+            return (
+                <span className="badge badge-primary">In Stock</span>
+            )
+        } else {
+            return (
+                <span className="badge badge-danger">Sold Out</span>
+            )
+        }
+    }
+
+    const buyIfAvailable = (product) => {
+        if (product.quantity >= 1) {
+            return (
+                <Link to="/">
+                    <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                </Link>
+            )
+        } else {
+            return (
+                <span className="badge badge-danger">Sold Out</span>
+            )
+        }
+    }
+
     const showRelatedProducts = () => {
-        if(relatedProducts && relatedProducts.length > 0){
-            return(
+        if (relatedProducts && relatedProducts.length > 0) {
+            return (
                 relatedProducts.map((product, i) => (
                     <div className="card" key={i}>
                         <div className="card-header">{product.name}</div>
@@ -54,12 +80,20 @@ const Product = (props) => {
                             <Link to={`/product/${product._id}`}>
                                 <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
                             </Link>
-                            <Link to="/">
-                                <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
-                            </Link>
+                            {buyIfAvailable(product)}
                         </div>
                     </div>
                 ))
+            )
+        }
+    }
+
+    const addToCartButton = (product) => {
+        if (product.quantity >= 1) {
+            return (
+                <Link to="/">
+                    <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                </Link>
             )
         }
     }
@@ -84,14 +118,12 @@ const Product = (props) => {
                     <div className="card-body">
                         <p className="card-text">{product.description}...</p>
                         <p>{product.price}€</p>
-                        <p>{product.quantity} books left</p>
-                        <Link to="/">
-                            <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
-                        </Link>
+                        {availability(product)}
+                        {addToCartButton(product)}
                     </div>
                 </div>
             </div>
-            {relatedProducts.length > 0 &&(
+            {relatedProducts.length > 0 && (
                 <h4>Related products you might also like</h4>
             )}
             <div className="row">
