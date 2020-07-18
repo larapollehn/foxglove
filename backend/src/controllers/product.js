@@ -172,7 +172,7 @@ exports.listBySearch = (req, res) => {
         $lte: price_top,
     };
 
-    for (const category of categories){
+    for (const category of categories) {
         findArgs["category"] = category;
     }
 
@@ -231,3 +231,19 @@ exports.listAllProducts = (req, res) => {
             return res.json({products});
         });
 };
+
+//db.products.find({ $and: [{name: /.*buch.*/}, {category: ObjectId("5f1197f443ab89001811e808")}]})
+exports.searchByUserInput = (req, res) => {
+    const category = req.body.category;
+    const searchString = req.body.search;
+    log.debug("Products based on users search is requested, (category, searchString)", category, searchString);
+    Product.find({ $and: [{name: `/.*${searchString}.*/`}, {category: category}]})
+        .exec((err, products) => {
+            if (err) {
+                return res.status(400)
+                    .json({error: "No Products found"});
+            }
+            log.debug("Searched products were found");
+            return res.json({products});
+        });
+}

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import axios from "axios";
+
 import log from "../utils/Logger";
 
 const Search = () => {
@@ -10,7 +11,7 @@ const Search = () => {
         results: [],
         searched: false
     });
-    const{categories, category, search, results, searched} = data;
+    const {categories, category, search, results, searched} = data;
 
     // lists all distinct categories
     // _id has the names as values and the_id is the actual id
@@ -27,12 +28,26 @@ const Search = () => {
         })
     };
 
-    const handleChange = () => {
-
+    const handleChange = (name) => (event) => {
+        setData({...data, [name]: event.target.value, searched: false});
     }
 
-    const searchByUserInput = () => {
-
+    const searchByUserInput = (event) => {
+        event.preventDefault();
+        log.debug("User searches for product, (category, search input)", category, search);
+        axios({
+            method: "POST",
+            url: "/api/product/search",
+            data:{
+                category: category,
+                search: search ? search : undefined
+            }
+        }).then((response) => {
+            log.debug("Products matching search", response.data);
+            //setData({...data, results: response.data,, searched: true});
+        }).catch((error) => {
+            log.debug("Could not find products matching the search", error);
+        })
     }
 
     const searchForm = () => (
@@ -49,7 +64,8 @@ const Search = () => {
                             }
                         </select>
                     </div>
-                    <input type="search" className="form-control" onChange={handleChange("search")} placeholder="Search by name..."/>
+                    <input type="search" className="form-control" onChange={handleChange("search")}
+                           placeholder="Search by name..."/>
                     <button onClick={searchByUserInput}>Search</button>
                 </div>
             </span>
@@ -61,9 +77,10 @@ const Search = () => {
         listAllCategories()
     }, [])
 
-    return(
+    return (
         <div className="row">
             <div className="container">{searchForm()}</div>
+            {JSON.stringify(results)}
         </div>
     )
 }
