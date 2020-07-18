@@ -9,46 +9,36 @@ import localStorageManager from "../utils/LocalStorageManager";
 const Shop = () => {
     const {user, token} = localStorageManager.getUser();
     const [categories, setCategories] = useState([]);
-    const [checked, setChecked] = useState([]);
-    const [filters, setFilters] = useState({
-        filters: {category: [], price: []}
-    });
+    const [checkedCategories, setCheckedCategories] = useState([]);
+    const [priceRange, setPriceRange] = useState([]);
     const [skip, setSkip] = useState(0);
     const [limit, setLimit] = useState(6);
     const [filteredProducts, setFilteredProducts] = useState([]);
 
     const handleCategoryToggle = checkedCategory => () => {
-        log.debug("Newly checked category:", checkedCategory);
-        const indexCurrentCategory = checked.indexOf(checkedCategory);
-        const allCheckedCategories = [...checked];
+        log.debug("Newly checkedCategories category:", checkedCategory);
+        const indexCurrentCategory = checkedCategories.indexOf(checkedCategory);
+        const allCheckedCategories = [...checkedCategories];
 
-        //is category in list of checked categories remove it, else add
+        //is category in list of checkedCategories categories remove it, else add
         if(indexCurrentCategory === -1){
             allCheckedCategories.push(checkedCategory);
-            log.debug("Added new category to checked. Now:", allCheckedCategories);
+            log.debug("Added new category to checkedCategories. Now:", allCheckedCategories);
         } else {
             allCheckedCategories.splice(indexCurrentCategory, 1);
-            log.debug("Removed category in checked. Now:", allCheckedCategories);
+            log.debug("Removed category in checkedCategories. Now:", allCheckedCategories);
         }
-        setChecked(allCheckedCategories);
-
-        // set the chosen category/categories in the filter object
-        const categoryFilter = {...filters};
-        categoryFilter.filters["category"] = allCheckedCategories;
-        setFilters(categoryFilter);
+        setCheckedCategories(allCheckedCategories);
     }
 
     const handelPriceChoice = selectedPriceRange => () =>{
         log.debug("Newly selected price range:", selectedPriceRange);
-        // set the chosen price range in the filter object
-        const categoryFilter = {...filters};
-        categoryFilter.filters["price"] = selectedPriceRange;
-        setFilters(categoryFilter);
+        setPriceRange(selectedPriceRange);
     }
 
     // https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/product/post_product_by_search
     const fetchProducts = () => {
-        log.debug("Current args for fetching products: (skip, limit, filters)", skip, limit, filters);
+        log.debug("Current args for fetching products: (skip, limit, filters)", skip, limit, priceRange[0],priceRange[1], checkedCategories);
         axios({
             method: 'POST',
             url: "/api/product/by/search",
@@ -60,7 +50,9 @@ const Shop = () => {
             data: {
                 skip: skip,
                 limit: limit,
-                filters: filters
+                price_bottom: priceRange[0],
+                price_top: priceRange[1],
+                category: checkedCategories
             }
         }).then((response) => {
             log.debug("Products were fetched", response.data);
@@ -100,7 +92,7 @@ const Shop = () => {
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
                         <li className="list-unstyled" key={i}>
-                            <input onChange={handleCategoryToggle(category.the_id)} type="checkbox" className="form-check-input" value={checked.indexOf(category.the_id)}/>
+                            <input onChange={handleCategoryToggle(category.the_id)} type="checkbox" className="form-check-input" value={checkedCategories.indexOf(category.the_id)}/>
                             <label className="form-check-label">{category._id}</label>
                         </li>
                         )
@@ -116,11 +108,11 @@ const Shop = () => {
                     <button onClick={fetchProducts} className="btn btn-primary">Apply Filters</button>
                 </div>
                 <div className="col-8">Right Side
-                    {JSON.stringify(filters)}
                 </div>
             </div>
         </Layout>
     )
 }
+
 
 export default Shop;

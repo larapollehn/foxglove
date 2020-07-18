@@ -154,46 +154,30 @@ exports.listProductCategories = (req, res) => {
  * @param res
  */
 exports.listBySearch = (req, res) => {
-    log.debug(req.body.limit);
-    log.debug(req.body.skip);
     const order = req.body.order ? req.body.order : "desc";
     const sortBy = req.body.sortBy ? req.body.sortBy : "_id";
     const limit = req.body.limit ? parseInt(req.body.limit) : 100;
+    const price_top = req.body.price_top ? req.body.price_top : 0;
+    const price_bottom = req.body.price_bottom ? req.body.price_bottom : 100;
+    const categories = req.body.category ? req.body.category : [];
     // skip decides how many products are skipped when being fetched
     // needed for "load more books" in shop page
-    const skip = parseInt(req.body.skip);
+    const skip = req.body.skip ? parseInt(req.body.skip) : 0;
+    log.debug(order, sortBy, limit, price_top, price_bottom, categories, skip);
+
     const findArgs = {};
-    log.debug("Product was searched by user:", order, sortBy, limit);
 
-    log.debug("Filters in request body:", req.body.filters, typeof req.body.filters);
-    /**
-    const filters = req.body.filters;
-    const priceRange = filters.price;
-    log.debug("priceRange", priceRange);
-    const bottomPrice = priceRange[0];
-    log.debug("bottomPrice", bottomPrice);
-    const topPrice = priceRange[1];
-    log.debug("topPrice", topPrice);
-    const category = filters.category[0];
-    log.debug("category", category);
-     **/
+    findArgs["price"] = {
+        $gte: price_bottom,
+        $lte: price_top,
+    };
 
-    for (const key in req.body.filters) {
-        if (req.body.filters[key].length > 0) {
-            if (key === "price") {
-                // gte -  greater than price [0-10]
-                // lte - less than
-                findArgs[key] = {
-                    $gte: req.body.filters[key][0],
-                    $lte: req.body.filters[key][1],
-                };
-            } else {
-                findArgs[key] = req.body.filters[key];
-            }
-        }
+    for (const category of categories){
+        findArgs["category"] = category;
     }
 
     log.debug("Products in range should have the args:", findArgs);
+
     Product.find(findArgs)
         .select("-photo")
         .populate("category")
