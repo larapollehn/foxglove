@@ -173,7 +173,7 @@ exports.listBySearch = (req, res) => {
     };
 
     for (const category of categories){
-        findArgs["category"] = `ObjectId(${category})`;
+        findArgs["category"] = `ObjectId("${category}")`;
     }
 
     log.debug("Products in range should have the args:", findArgs);
