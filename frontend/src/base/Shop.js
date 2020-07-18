@@ -3,6 +3,7 @@ import axios from "axios";
 
 import Layout from "./Layout";
 import log from "../utils/Logger";
+import {prices} from "./helpers";
 
 const Shop = () => {
     const [categories, setCategories] = useState([]);
@@ -12,7 +13,7 @@ const Shop = () => {
         filters: {category: [], price: []}
     });
 
-    const handleToggle = checkedCategory => () => {
+    const handleCategoryToggle = checkedCategory => () => {
         log.debug("Newly checked category:", checkedCategory);
         const indexCurrentCategory = checked.indexOf(checkedCategory);
         const allCheckedCategories = [...checked];
@@ -30,6 +31,14 @@ const Shop = () => {
         // set the chosen category/categories in the filter object
         const categoryFilter = {...filters};
         categoryFilter.filters["category"] = allCheckedCategories;
+        setFilters(categoryFilter);
+    }
+
+    const handelPriceChoice = selectedPriceRange => () =>{
+        log.debug("Newly selected price range:", selectedPriceRange);
+        // set the chosen price range in the filter object
+        const categoryFilter = {...filters};
+        categoryFilter.filters["price"] = selectedPriceRange;
         setFilters(categoryFilter);
     }
 
@@ -63,9 +72,17 @@ const Shop = () => {
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
                         <li className="list-unstyled" key={i}>
-                            <input onChange={handleToggle(category.the_id)} type="checkbox" className="form-check-input" value={checked.indexOf(category.the_id)}/>
+                            <input onChange={handleCategoryToggle(category.the_id)} type="checkbox" className="form-check-input" value={checked.indexOf(category.the_id)}/>
                             <label className="form-check-label">{category._id}</label>
                         </li>
+                        )
+                    )}
+                    <h4>Filter by price</h4>
+                    {prices.map((range, i) => (
+                            <li className="list-unstyled" key={i}>
+                                <input onChange={handelPriceChoice(range.array)} name={"price"} type="radio" className="form-check-input" value={range._id}/>
+                                <label className="form-check-label">{range.name}</label>
+                            </li>
                         )
                     )}
                 </div>
