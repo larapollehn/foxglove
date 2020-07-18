@@ -7,6 +7,10 @@ import log from "../utils/Logger";
 const Shop = () => {
     const [categories, setCategories] = useState([]);
     const [checked, setChecked] = useState([]);
+    const [priceRange, setPriceRange] = useState([]);
+    const [filters, setFilters] = useState({
+        filters: {category: [], price: []}
+    });
 
     const handleToggle = checkedCategory => () => {
         log.debug("Newly checked category:", checkedCategory);
@@ -22,6 +26,11 @@ const Shop = () => {
             log.debug("Removed category in checked. Now:", allCheckedCategories);
         }
         setChecked(allCheckedCategories);
+
+        // set the chosen category/categories in the filter object
+        const categoryFilter = {...filters};
+        categoryFilter.filters["category"] = allCheckedCategories;
+        setFilters(categoryFilter);
     }
 
     useEffect(() => {
@@ -29,6 +38,7 @@ const Shop = () => {
     }, []);
 
     // lists all distinct categories
+    // _id has the names as values and the_id is the actual id
     // https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/category/get_category
     const listAllCategories = () => {
         axios({
@@ -59,7 +69,9 @@ const Shop = () => {
                         )
                     )}
                 </div>
-                <div className="col-8">Right Side</div>
+                <div className="col-8">Right Side
+                    {JSON.stringify(filters)}
+                </div>
             </div>
         </Layout>
     )
