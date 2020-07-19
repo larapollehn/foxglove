@@ -57,6 +57,14 @@ class LocalStorageManager{
         localStorage.setItem(this.cartKey, JSON.stringify(data));
     }
 
+    /**
+     * removes users jwt token from localStorage
+     * after logout from user
+     */
+    removeCart(){
+        log.debug("User token was removed from localstorage");
+        localStorage.removeItem(this.cartKey);
+    }
 
 }
 

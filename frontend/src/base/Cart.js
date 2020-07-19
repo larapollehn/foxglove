@@ -54,6 +54,11 @@ const Cart = () => {
         setShowModal(true);
     }
 
+    const emptyCart = () => {
+        localStorageManager.removeCart();
+        setItems([]);
+    }
+
     return (
         <Layout
             title="Cart"
@@ -63,7 +68,9 @@ const Cart = () => {
             <div className="card">
                 <div className="card-body">
                     <h5 className="card-title">Your Cart</h5>
-                    <p className="card-text">You have {items.length} products in your cart.</p>
+                    {items.length > 0 &&
+                    <p className="card-text">You have {items.length} product(s) in your cart.</p>
+                    }
                 </div>
                 <ul className="list-group list-group-flush">
                     {items.length > 0 && items.map((item, i) => (
@@ -83,7 +90,7 @@ const Cart = () => {
                             </div>
                         </li>
                     ))}
-                    {items.length === 0 && (
+                    {!items && (
                         <li className="list-group-item">You have not added any items to your cart. <Link to={`/shop`}>
                             Shop now!
                         </Link>
@@ -108,11 +115,12 @@ const Cart = () => {
                     <div className="form-row">
                         <div className="form-group col-md-6">
                             <label htmlFor="inputEmail4">Anrede</label>
-                            <input type="text" className="form-control"  placeholder="Mrs./Ms. or leave empty"/>
+                            <input type="text" className="form-control" placeholder="Mrs./Ms. or leave empty"/>
                         </div>
                         <div className="form-group col-md-6">
                             <label htmlFor="inputPassword4">Full Name</label>
-                            <input type="text" className="form-control" id="inputPassword4" placeholder="FirstName LastName"/>
+                            <input type="text" className="form-control" id="inputPassword4"
+                                   placeholder="FirstName LastName"/>
                         </div>
                     </div>
                     <div className="form-group">
@@ -131,7 +139,7 @@ const Cart = () => {
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="inputState">Country</label>
-                            <input type="text" className="form-control" placeholder="DE" />
+                            <input type="text" className="form-control" placeholder="DE"/>
                         </div>
                         <div className="form-group col-md-2">
                             <label htmlFor="inputZip">Zip</label>
@@ -153,7 +161,7 @@ const Cart = () => {
                         <button className="btn btn-outline-primary mt-2 mb-2">Back to Shop</button>
                     </Link>
                     <Link to={`/confirmation`}>
-                        <button className="btn btn-outline-primary mt-2 mb-2">Checkout</button>
+                        <button onClick={emptyCart} className="btn btn-outline-primary mt-2 mb-2">Checkout</button>
                     </Link>
                 </div>
             )}
