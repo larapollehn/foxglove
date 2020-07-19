@@ -144,6 +144,16 @@ const Shop = () => {
         }
     }
 
+    const addToCartButton = (product) => {
+        if (product.quantity >= 1) {
+            return (
+                <Link to="/">
+                    <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                </Link>
+            )
+        }
+    }
+
     return (
         <Layout
             title="Shop"
@@ -188,10 +198,7 @@ const Shop = () => {
                                     <Link to={`/product/${product._id}`}>
                                         <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
                                     </Link>
-                                    <button onClick={() => {
-                                        addToCart(product)
-                                    }} className="btn btn-outline-primary mt-2 mb-2">Add to Card
-                                    </button>
+                                    {addToCartButton(product)}
                                 </div>
                             </div>
                         ))}

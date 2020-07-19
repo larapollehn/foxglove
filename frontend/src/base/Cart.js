@@ -28,6 +28,15 @@ const Cart = () => {
         <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "50px"}}/>
     )
 
+    const handleChange = product => event => {
+        let newCount = event.target.value > 1 ? event.target.value : 1;
+        items.map((item, i) => {
+            if(item._id === product._id){
+                items[i].count = newCount;
+            }
+        })
+        localStorageManager.saveCart(items);
+    }
 
     useEffect(() => {
         getCartItems();
@@ -49,6 +58,12 @@ const Cart = () => {
                         <li key={i} className="list-group-item">
                             {showImage(item)}
                             {item.name} | {item.price}€
+                            <div className="input-group">
+                                <div className="input-group-prepend">
+                                    <span className="input-group-text">Amount</span>
+                                </div>
+                                <input type="number" className="form-control" placeholder={item.count} onChange={handleChange(item)}/>
+                            </div>
                         </li>
                     ))}
                     {items.length === 0 && (
