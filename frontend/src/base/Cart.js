@@ -98,7 +98,7 @@ const Cart = () => {
                         </Link>
                     )}
                     {items.length > 0 && showBuyButton && (
-                        <button onClick={openPayment} className="btn btn-outline-primary mt-2 mb-2">Buy now</button>
+                        <button onClick={openPayment} className="btn btn-outline-primary mt-2 mb-2">Order now</button>
                     )}
                 </div>
             </div>
@@ -138,6 +138,7 @@ const Cart = () => {
                             <input type="text" className="form-control" id="inputZip"/>
                         </div>
                     </div>
+                    <h3>Info! You pay after receiving your order. Available Payment Options will be</h3>
                     <div className="form-row">
                         <div className="form-group col-md-4">
                             <label htmlFor="inputState">Mastercard</label>
@@ -151,7 +152,9 @@ const Cart = () => {
                     <Link to={`/shop`}>
                         <button className="btn btn-outline-primary mt-2 mb-2">Back to Shop</button>
                     </Link>
-                    <button  className="btn btn-primary">Buy</button>
+                    <Link to={`/confirmation`}>
+                        <button className="btn btn-outline-primary mt-2 mb-2">Checkout</button>
+                    </Link>
                 </div>
             )}
         </Layout>
