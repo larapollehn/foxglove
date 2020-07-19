@@ -33,13 +33,6 @@ const Home = () => {
         <img src={`/api/product/photo/${product._id}`} alt={product.name}/>
     )
 
-    const addToCart = (product) => {
-        log.debug("Clicked add to cart button in Home");
-        addItemToCart(product, () => {
-            log.debug("Added product to cart");
-        })
-    }
-
     return (
         <div>
             <Layout title="Home Page" description="MERN Stack app">
@@ -57,7 +50,6 @@ const Home = () => {
                                 <Link to={`/product/${product._id}`}>
                                     <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
                                 </Link>
-                                <button onClick={() => {addToCart(product)}} className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
                             </div>
                         </div>
                     </div>)

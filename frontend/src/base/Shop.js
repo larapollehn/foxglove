@@ -119,27 +119,29 @@ const Shop = () => {
 
     const shoppingCart = () => {
         let products = localStorageManager.getCart();
-        return (
-            <div style={{display: showShoppingCart ? '' : "none"}}>
-                <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Your Shopping Cart</h5>
-                    </div>
-                    <ul className="list-group list-group-flush">
-                        {
-                            products.map((product, i) => (
-                                <li key={i} className="list-group-item">{product.name} - {product.price}€</li>
-                            ))
-                        }
-                    </ul>
-                    <div className="card-body">
-                        <Link to={`/`}>
-                            <button className="btn btn-outline-primary mt-2 mb-2">Checkout</button>
-                        </Link>
+        if(products.length > 0) {
+            return (
+                <div style={{display: showShoppingCart ? '' : "none"}}>
+                    <div className="card">
+                        <div className="card-body">
+                            <h5 className="card-title">Your Shopping Cart</h5>
+                        </div>
+                        <ul className="list-group list-group-flush">
+                            {
+                                products.map((product, i) => (
+                                    <li key={i} className="list-group-item">{product.name} - {product.price}€</li>
+                                ))
+                            }
+                        </ul>
+                        <div className="card-body">
+                            <Link to={`/cart`}>
+                                <button className="btn btn-outline-primary mt-2 mb-2">View Cart</button>
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 
     return (

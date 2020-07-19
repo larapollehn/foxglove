@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Link, withRouter} from "react-router-dom";
 import axios from "axios";
 
@@ -34,6 +34,20 @@ const logout = () => {
  * props attribute history can be directly accessed trough destructuring
  */
 const Navbar = ({history}) => {
+    const [totalItems, setTotalItems] = useState(0);
+
+    const getCartItemCount = () => {
+        if(localStorageManager.getCart()){
+            const itemCount = localStorageManager.getCart().length;
+            log.debug("The total item count is:", itemCount);
+            setTotalItems(itemCount);
+        }
+    }
+
+    useEffect(() => {
+        getCartItemCount();
+    }, []);
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -66,7 +80,9 @@ const Navbar = ({history}) => {
                                     <Link className="nav-link" style={isActive(history, "/admin/dashboard")} to="/admin/dashboard">Dashboard</Link>
                                 </li>
                             )}
-
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/cart">Cart <sup><small className="badge badge-pill badge-primary">{totalItems}</small></sup></Link>
+                            </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/" onClick={logout}>Logout</Link>
                             </li>
