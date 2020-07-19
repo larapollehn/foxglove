@@ -2,7 +2,8 @@
 
 ### Requirements
 
-Implementation of a book shop with Admin dashboard and payment gateway. 
+Implementation of a book shop with Admin dashboard and payment gateway. User can manage 
+his/her profile and see his/her personal purchasing history.
 
 ### Doc for API 
 
@@ -13,3 +14,19 @@ https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/
 - [x] Second Sprint: Basic MVP Frontend (Estimation: 3 Days)
 - [ ] Third Sprint: Payment gateway and verification (Estimation: 2 Days)
 - [ ] Last Sprint: Final Styling and responsive (Estimation: 2 Days)  
+
+### How to setup the project
+Add proper environments in a `.env` file in directory `backend`:
+
+```
+DATABASE=mongodb://domain_name/ecommerce
+PORT=8000
+JWT_SECRET=secret
+LOG_LEVEL=debug
+```
+
+Start the docker compose file with 
+
+```
+docker-compose up -d --build
+```
