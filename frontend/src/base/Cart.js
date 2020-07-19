@@ -7,14 +7,7 @@ import {Link} from "react-router-dom";
 
 const Cart = () => {
     const [items, setItems] = useState([]);
-
-    const getCartItems = () => {
-        if (localStorageManager.getCart()) {
-            const itemsInCart = localStorageManager.getCart();
-            log.debug("Got all items in cart:", itemsInCart);
-            setItems(itemsInCart);
-        }
-    }
+    const [update, setUpdate] = useState(false);
 
     const totalPrice = () => {
         let sum = 0;
@@ -28,7 +21,8 @@ const Cart = () => {
         <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "50px"}}/>
     )
 
-    const handleChange = product => event => {
+    const changeProductAmount = product => event => {
+        setUpdate(!update);
         let newCount = event.target.value > 1 ? event.target.value : 1;
         items.map((item, i) => {
             if(item._id === product._id){
@@ -38,9 +32,19 @@ const Cart = () => {
         localStorageManager.saveCart(items);
     }
 
+    const deleteProductFromCart = product => {
+        items.map((item, i) => {
+            if(item._id === product._id){
+                items.splice(i, 1);
+            }
+        })
+        localStorageManager.saveCart(items);
+        setUpdate(!update);
+    }
+
     useEffect(() => {
-        getCartItems();
-    }, []);
+       setItems(localStorageManager.getCart())
+    }, [update]);
 
     return (
         <Layout
@@ -62,7 +66,8 @@ const Cart = () => {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text">Amount</span>
                                 </div>
-                                <input type="number" className="form-control" placeholder={item.count} onChange={handleChange(item)}/>
+                                <input type="number" className="form-control" placeholder={item.count} onChange={changeProductAmount(item)}/>
+                                <button onClick={() => {deleteProductFromCart(item)}} className="btn btn-danger">Remove</button>
                             </div>
                         </li>
                     ))}
