@@ -9,7 +9,7 @@ const Cart = () => {
     const [items, setItems] = useState([]);
 
     const getCartItems = () => {
-        if(localStorageManager.getCart()){
+        if (localStorageManager.getCart()) {
             const itemsInCart = localStorageManager.getCart();
             log.debug("Got all items in cart:", itemsInCart);
             setItems(itemsInCart);
@@ -18,7 +18,7 @@ const Cart = () => {
 
     const totalPrice = () => {
         let sum = 0;
-        for (let i = 0; i < items.length; i++){
+        for (let i = 0; i < items.length; i++) {
             sum += items[i].price;
         }
         return sum;
@@ -33,34 +33,40 @@ const Cart = () => {
         getCartItems();
     }, []);
 
-    return(
+    return (
         <Layout
             title="Cart"
             description="Buy them books now!"
             className="container"
         >
             <div className="card">
-                    <div className="card-body">
-                        <h5 className="card-title">Your Cart</h5>
-                        <p className="card-text">You have {items.length} products in your cart.</p>
-                    </div>
-                    <ul className="list-group list-group-flush">
-                        {items.map((item, i) => (
-                            <li key={i} className="list-group-item">
-                                {showImage(item)}
-                                {item.name} | {item.price}€
-                            </li>
-                        ))}
-                        <li className="list-group-item">Total: {totalPrice()}€</li>
-                    </ul>
-                    <div className="card-body">
-                        <Link to={`/shop`}>
-                            <button className="btn btn-outline-primary mt-2 mb-2">Back to Shop</button>
+                <div className="card-body">
+                    <h5 className="card-title">Your Cart</h5>
+                    <p className="card-text">You have {items.length} products in your cart.</p>
+                </div>
+                <ul className="list-group list-group-flush">
+                    {items.length > 0 && items.map((item, i) => (
+                        <li key={i} className="list-group-item">
+                            {showImage(item)}
+                            {item.name} | {item.price}€
+                        </li>
+                    ))}
+                    {items.length === 0 && (
+                        <li className="list-group-item">You have not added any items to your cart. <Link to={`/shop`}>
+                            Shop now!
                         </Link>
-                        <Link to={`/`}>
-                            <button className="btn btn-outline-primary mt-2 mb-2">Buy now</button>
-                        </Link>
-                    </div>
+                        </li>
+                    )}
+                    <li className="list-group-item">Total: {totalPrice()}€</li>
+                </ul>
+                <div className="card-body">
+                    <Link to={`/shop`}>
+                        <button className="btn btn-outline-primary mt-2 mb-2">Back to Shop</button>
+                    </Link>
+                    {items.length > 0 && (<Link to={`/`}>
+                        <button className="btn btn-outline-primary mt-2 mb-2">Buy now</button>
+                    </Link>)}
+                </div>
             </div>
         </Layout>
 
