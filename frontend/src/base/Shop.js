@@ -119,7 +119,7 @@ const Shop = () => {
 
     const shoppingCart = () => {
         let products = localStorageManager.getCart();
-        if(products.length > 0) {
+        if (products.length > 0) {
             return (
                 <div style={{display: showShoppingCart ? '' : "none"}}>
                     <div className="card">
@@ -144,12 +144,10 @@ const Shop = () => {
         }
     }
 
-    const addToCartButton = (product) => {
+    const addToCartButton = product => {
         if (product.quantity >= 1) {
             return (
-                <Link to="/">
-                    <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
-                </Link>
+                <button onClick={() => {addToCart(product)}} className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
             )
         }
     }
