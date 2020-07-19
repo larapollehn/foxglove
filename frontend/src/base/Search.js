@@ -97,9 +97,6 @@ const Search = () => {
                                 <Link to={`/product/${product._id}`}>
                                     <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
                                 </Link>
-                                <Link to="/">
-                                    <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
-                                </Link>
                             </div>
                         </div>
                     ))}

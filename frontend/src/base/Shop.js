@@ -20,17 +20,7 @@ const Shop = () => {
 
     const handleCategoryToggle = checkedCategory => () => {
         log.debug("Newly checkedCategories category:", checkedCategory);
-        const indexCurrentCategory = checkedCategories.indexOf(checkedCategory);
-        const allCheckedCategories = [...checkedCategories];
-
-        //is category in list of checkedCategories categories remove it, else add
-        if (indexCurrentCategory === -1) {
-            allCheckedCategories.push(checkedCategory);
-            log.debug("Added new category to checkedCategories. Now:", allCheckedCategories);
-        } else {
-            allCheckedCategories.splice(indexCurrentCategory, 1);
-            log.debug("Removed category in checkedCategories. Now:", allCheckedCategories);
-        }
+        const allCheckedCategories = [checkedCategory];
         setCheckedCategories(allCheckedCategories);
     }
 
@@ -164,7 +154,7 @@ const Shop = () => {
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
                             <li className="list-unstyled" key={i}>
-                                <input onChange={handleCategoryToggle(category.the_id)} type="checkbox"
+                                <input onChange={handleCategoryToggle(category.the_id)} name={"category"} type="radio"
                                        className="form-check-input" value={checkedCategories.indexOf(category.the_id)}/>
                                 <label className="form-check-label">{category._id}</label>
                             </li>
