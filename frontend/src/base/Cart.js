@@ -7,12 +7,10 @@ import {Link} from "react-router-dom";
 
 const Cart = () => {
     const [items, setItems] = useState([]);
-    const [soldOutProducts, setSoldOutProducts] = useState([]);
 
     const getCartItems = () => {
         if (localStorageManager.getCart()) {
-            //filter out all products no longer in stock
-            const itemsInCart = localStorageManager.getCart().filter(item => item.quantity > 0);
+            const itemsInCart = localStorageManager.getCart();
             log.debug("Got all items in cart:", itemsInCart);
             setItems(itemsInCart);
         }
