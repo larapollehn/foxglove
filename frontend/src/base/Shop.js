@@ -16,6 +16,7 @@ const Shop = () => {
     const [limit, setLimit] = useState(4);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [productAmount, setProductAmount] = useState(0);
+    const [showShoppingCart, setShowCart] = useState(false);
 
     const handleCategoryToggle = checkedCategory => () => {
         log.debug("Newly checkedCategories category:", checkedCategory);
@@ -106,9 +107,39 @@ const Shop = () => {
 
     const addToCart = (product) => {
         log.debug("Clicked add to card button in Shop");
-        addItemToCart(product, () => {
-            log.debug("Added product to cart");
-        })
+        addItemToCart(product, showCart);
+    }
+
+    const showCart = () => {
+        setShowCart(true);
+        setTimeout(() => {
+            setShowCart(false);
+        }, 3000)
+    }
+
+    const shoppingCart = () => {
+        let products = localStorageManager.getCart();
+        return (
+            <div style={{display: showShoppingCart ? '' : "none"}}>
+                <div className="card">
+                    <div className="card-body">
+                        <h5 className="card-title">Your Shopping Cart</h5>
+                    </div>
+                    <ul className="list-group list-group-flush">
+                        {
+                            products.map((product, i) => (
+                                <li key={i} className="list-group-item">{product.name} - {product.price}€</li>
+                            ))
+                        }
+                    </ul>
+                    <div className="card-body">
+                        <Link to={`/`}>
+                            <button className="btn btn-outline-primary mt-2 mb-2">Checkout</button>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     return (
@@ -119,6 +150,7 @@ const Shop = () => {
         >
             <div className="row">
                 <div className="col-4">
+                    {shoppingCart()}
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
                             <li className="list-unstyled" key={i}>
@@ -154,7 +186,10 @@ const Shop = () => {
                                     <Link to={`/product/${product._id}`}>
                                         <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
                                     </Link>
-                                    <button onClick={() => {addToCart(product)}} className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                                    <button onClick={() => {
+                                        addToCart(product)
+                                    }} className="btn btn-outline-primary mt-2 mb-2">Add to Card
+                                    </button>
                                 </div>
                             </div>
                         ))}
