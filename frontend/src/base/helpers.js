@@ -1,3 +1,5 @@
+import localStorageManager from "../utils/LocalStorageManager";
+
 export const prices = [
     {
         _id: 0,
@@ -36,3 +38,19 @@ export const prices = [
     }
 ]
 
+export const addItemToCart = (item, next) => {
+    let cart = [];
+    if(localStorageManager.getCart()){
+        cart = localStorageManager.getCart();
+    }
+    cart.push({
+        ...item, count: 1
+    })
+
+    //removes duplicate entries for the same product
+    cart = Array.from(new Set(cart.map(product => product._id))).map(id => {
+        return cart.find(product => product._id === id)
+    })
+    localStorageManager.saveCart(cart);
+    next();
+}

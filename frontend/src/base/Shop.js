@@ -3,7 +3,7 @@ import axios from "axios";
 
 import Layout from "./Layout";
 import log from "../utils/Logger";
-import {prices} from "./helpers";
+import {addItemToCart, prices} from "./helpers";
 import localStorageManager from "../utils/LocalStorageManager";
 import {Link} from "react-router-dom";
 
@@ -23,7 +23,7 @@ const Shop = () => {
         const allCheckedCategories = [...checkedCategories];
 
         //is category in list of checkedCategories categories remove it, else add
-        if(indexCurrentCategory === -1){
+        if (indexCurrentCategory === -1) {
             allCheckedCategories.push(checkedCategory);
             log.debug("Added new category to checkedCategories. Now:", allCheckedCategories);
         } else {
@@ -33,14 +33,14 @@ const Shop = () => {
         setCheckedCategories(allCheckedCategories);
     }
 
-    const handelPriceChoice = selectedPriceRange => () =>{
+    const handelPriceChoice = selectedPriceRange => () => {
         log.debug("Newly selected price range:", selectedPriceRange);
         setPriceRange(selectedPriceRange);
     }
 
     // https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/product/post_product_by_search
     const fetchProducts = () => {
-        log.debug("Current args for fetching products: (skip, limit, filters)", skip, limit, priceRange[0],priceRange[1], checkedCategories);
+        log.debug("Current args for fetching products: (skip, limit, filters)", skip, limit, priceRange[0], priceRange[1], checkedCategories);
         axios({
             method: 'POST',
             url: "/api/product/by/search",
@@ -66,16 +66,16 @@ const Shop = () => {
     }
 
     const loadMoreButton = () => {
-      return(
-          productAmount > 0 && productAmount >= limit && (
-          <button className="btn btn-primary" onClick={loadMore}>Load More</button>
-          )
-      )
+        return (
+            productAmount > 0 && productAmount >= limit && (
+                <button className="btn btn-primary" onClick={loadMore}>Load More</button>
+            )
+        )
     }
 
     const loadMore = (event) => {
         event.preventDefault();
-        const newLimit = limit *2;
+        const newLimit = limit * 2;
         setLimit(newLimit);
     }
 
@@ -104,6 +104,13 @@ const Shop = () => {
         <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
     )
 
+    const addToCart = (product) => {
+        log.debug("Clicked add to card button in Shop");
+        addItemToCart(product, () => {
+            log.debug("Added product to cart");
+        })
+    }
+
     return (
         <Layout
             title="Shop"
@@ -114,16 +121,18 @@ const Shop = () => {
                 <div className="col-4">
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
-                        <li className="list-unstyled" key={i}>
-                            <input onChange={handleCategoryToggle(category.the_id)} type="checkbox" className="form-check-input" value={checkedCategories.indexOf(category.the_id)}/>
-                            <label className="form-check-label">{category._id}</label>
-                        </li>
+                            <li className="list-unstyled" key={i}>
+                                <input onChange={handleCategoryToggle(category.the_id)} type="checkbox"
+                                       className="form-check-input" value={checkedCategories.indexOf(category.the_id)}/>
+                                <label className="form-check-label">{category._id}</label>
+                            </li>
                         )
                     )}
                     <h4>Filter by price</h4>
                     {prices.map((range, i) => (
                             <li className="list-unstyled" key={i}>
-                                <input onChange={handelPriceChoice(range.array)} name={"price"} type="radio" className="form-check-input" value={range._id}/>
+                                <input onChange={handelPriceChoice(range.array)} name={"price"} type="radio"
+                                       className="form-check-input" value={range._id}/>
                                 <label className="form-check-label">{range.name}</label>
                             </li>
                         )
@@ -139,15 +148,13 @@ const Shop = () => {
                                 <div className="card-header">{product.name}</div>
                                 {showImage(product)}
                                 <div className="card-body">
-                                    <p className="card-text">{product.description.substring(0,50)}...</p>
+                                    <p className="card-text">{product.description.substring(0, 50)}...</p>
                                     <p>{product.price}€</p>
                                     <p>{product.quantity} books left</p>
                                     <Link to={`/product/${product._id}`}>
                                         <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
                                     </Link>
-                                    <Link to="/">
-                                        <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
-                                    </Link>
+                                    <button onClick={() => {addToCart(product)}} className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
                                 </div>
                             </div>
                         ))}
