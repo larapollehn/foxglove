@@ -18,6 +18,7 @@ const isActive = (history, path) => {
  */
 const logout = () => {
     localStorageManager.removeUser();
+    localStorageManager.removeCart();
     axios({
         method: 'GET',
         url: "api/signout"

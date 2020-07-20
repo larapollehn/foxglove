@@ -35,18 +35,6 @@ const Dashboard = () => {
             </div>
         )
     }
-
-    const purchaseHistory = () => {
-        return (
-            <div className="card mb-5">
-                <h3 className="card-header">Purchase History</h3>
-                <ul className="list-group">
-                    <li className="list-group-item">history</li>
-                </ul>
-            </div>
-        )
-    }
-
     return(
         <Layout title="Dashboard" description={`Hello ${name}! Glad you are back.`} className="container">
             <div className="row">
@@ -55,7 +43,6 @@ const Dashboard = () => {
                 </div>
                 <div className="col-9">
                     {userInformation()}
-                    {purchaseHistory()}
                 </div>
             </div>
         </Layout>

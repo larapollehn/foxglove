@@ -13,12 +13,10 @@ const CreateProduct = () => {
         name: "",
         description: "",
         price: "",
-        categories: [],
         category: "",
         quantity: "",
         error: "",
         success: false,
-        createdProduct: "",
         formData: ""
     });
 
@@ -30,12 +28,14 @@ const CreateProduct = () => {
         category,
         quantity,
         error,
-        createdProduct,
         success,
         formData
     } = values;
 
+    const [categories, setCategories] = useState([]);
+
     useEffect(() => {
+        listAllCategories();
         setValues({...values, formData: new FormData(), error: false, success: false});
     }, []);
 
@@ -75,7 +75,7 @@ const CreateProduct = () => {
                 success: true,
                 createdProduct: response.data.name});
         }).catch((error) => {
-            log.debug("New Category could not be created:", error.response.data.error);
+            log.debug("New Product could not be created:", error.response.data.error);
             setValues({...values, error: error.response.data.error, success: false})
         })
     }
@@ -116,7 +116,15 @@ const CreateProduct = () => {
             </div>
             <div className="form-group">
                 <label className="text-muted">Category</label>
-                <input onChange={handleChange("category")} type="text" className="form-control" value={category} required/>
+                <select onChange={handleChange('category')} className="form-control">
+                    <option>Please select</option>
+                    {categories &&
+                    categories.map((c, i) => (
+                        <option key={i} value={c.the_id}>
+                            {c._id}
+                        </option>
+                    ))}
+                </select>
             </div>
             <div className="form-group">
                 <label className="text-muted">Quantity</label>
@@ -125,6 +133,21 @@ const CreateProduct = () => {
             <button type="submit" className="btn btn-primary">Create Product</button>
         </form>
     )
+
+    // lists all distinct categories
+    // _id has the names as values and the_id is the actual id
+    // https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/category/get_category
+    const listAllCategories = () => {
+        axios({
+            method: 'GET',
+            url: "/api/category"
+        }).then((response) => {
+            log.debug("List of all distinct categories:", response.data.category);
+            setCategories(response.data.category);
+        }).catch((error) => {
+            log.debug("Could not fetch list of categories", error.message);
+        })
+    };
 
     return (
         <div>
