@@ -214,13 +214,13 @@ exports.getProductPhoto = (req, res, next) => {
 };
 
 /**
- * get the six top selling products to display on home screen
+ * get six products to display on home screen
  * @param req
  * @param res
  */
 exports.listAllProducts = (req, res) => {
     log.debug("List of products was requested");
-    Product.find({sold: {$gt: 0}})
+    Product.find({sold: 0})
         .limit(6)
         .exec((err, products) => {
             if (err) {
