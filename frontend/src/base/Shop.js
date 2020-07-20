@@ -59,7 +59,7 @@ const Shop = () => {
     const loadMoreButton = () => {
         return (
             productAmount > 0 && productAmount >= limit && (
-                <button className="btn btn-primary" onClick={loadMore}>Load More</button>
+                <button className="btn btn-primary load-btn" onClick={loadMore}>Load More</button>
             )
         )
     }
@@ -92,7 +92,7 @@ const Shop = () => {
     }, []);
 
     const showImage = (product) => (
-        <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
+        <img className="product-photo"  src={`/api/product/photo/${product._id}`} alt={product.name}/>
     )
 
     const addToCart = (product) => {
@@ -160,6 +160,7 @@ const Shop = () => {
                             </li>
                         )
                     )}
+                    <br/>
                     <h4>Filter by price</h4>
                     {prices.map((range, i) => (
                             <li className="list-unstyled" key={i}>
@@ -169,6 +170,7 @@ const Shop = () => {
                             </li>
                         )
                     )}
+                    <br/>
                     <button onClick={fetchProducts} className="btn btn-primary">Apply Filters</button>
                 </div>
                 <div className="col-8">
@@ -176,7 +178,7 @@ const Shop = () => {
                     <p>Available Products: {productAmount}</p>
                     <div className="row">
                         {filteredProducts.slice(0, limit).map((product, i) => (
-                            <div className="card" key={i}>
+                            <div className="card col-md-6 mb-3" key={i}>
                                 <div className="card-header">{product.name}</div>
                                 {showImage(product)}
                                 <div className="card-body">

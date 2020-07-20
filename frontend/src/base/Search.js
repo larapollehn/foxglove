@@ -87,13 +87,12 @@ const Search = () => {
                 <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
                 <div className="row">
                     {results.map((product, i) => (
-                        <div className="card" key={i}>
+                        <div className="card col-md-3 mb-3" key={i}>
                             <div className="card-header">{product.name}</div>
                             {showImage(product)}
                             <div className="card-body">
                                 <p className="card-text">{product.description.substring(0, 50)}...</p>
                                 <p>{product.price}€</p>
-                                <p>{product.quantity} books left</p>
                                 <Link to={`/product/${product._id}`}>
                                     <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
                                 </Link>

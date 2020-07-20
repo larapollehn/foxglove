@@ -43,7 +43,13 @@
 }
 
 .card{
-    min-height: 500px;
+    padding: 0;
+}
+
+.card-header{
+    background-color: #ff3e8d;
+    color: white;
+    font-weight: bolder;
 }
 
 .btn-primary{
@@ -54,4 +60,13 @@
 .btn-primary:hover{
     background-color: #e8679d;
     border: none;
+}
+
+.btn-primary:focus{
+    background-color: #e8679d;
+    border: none;
+}
+
+.load-btn{
+    margin-bottom: 20px;
 }
