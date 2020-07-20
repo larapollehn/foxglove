@@ -220,7 +220,7 @@ exports.getProductPhoto = (req, res, next) => {
  */
 exports.listAllProducts = (req, res) => {
     log.debug("List of products was requested");
-    Product.find({sold: 0})
+    Product.find()
         .limit(6)
         .exec((err, products) => {
             if (err) {
