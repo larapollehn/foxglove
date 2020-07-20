@@ -7,7 +7,7 @@ import localStorageManager from "../utils/LocalStorageManager";
 
 const isActive = (history, path) => {
     if(history.location.pathname === path){
-        return {color: "#0073ff"};
+        return {color: "#e4932c"};
     } else {
         return {color: "#5a5855"};
     }
@@ -51,8 +51,7 @@ const Navbar = ({history}) => {
 
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="/">Welcome to Buchling</a>
+            <nav className="navbar navbar-expand-lg navbar-light ">
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false"
@@ -64,7 +63,7 @@ const Navbar = ({history}) => {
                 if user is authenticated only show specific nav options*/}
                 {localStorageManager.getUser() && (
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ml-auto">
+                        <ul className="navbar-nav ml-auto mr-auto">
                             <li className="nav-item">
                                 <Link className="nav-link" style={isActive(history, "/")} to="/">Home</Link>
                             </li>

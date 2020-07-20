@@ -57,7 +57,7 @@ const Search = () => {
                 <div className="input-group input-group-lg">
                     <input type="search" className="form-control" onChange={handleChange("search")}
                            placeholder="Search by name..."/>
-                    <button onClick={searchByUserInput}>Search</button>
+                    <button className="btn search-btn" onClick={searchByUserInput}>Search</button>
                 </div>
             </span>
 

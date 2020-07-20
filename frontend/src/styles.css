@@ -1,0 +1,47 @@
+.navbar-light .navbar-nav .nav-link{
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+.badge-primary {
+    color: #ffffff;
+    background-color: #ff3e8d;
+    font-weight: bold;
+}
+
+.jumbotron{
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+}
+
+.jumbo-logo{
+    width: 300px;
+}
+
+.input-group-text{
+    background-color: #ff3e8d;
+    border: none;
+}
+
+.input-group>.form-control:not(:last-child) {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+}
+
+.search-btn{
+    background-color: white;
+    margin-left: 10px;
+    font-weight: bold;
+    color: #e4932c;
+}
+
+.btn-primary{
+    background-color: #ff3e8d;
+    border: none;
+}
+
+.btn-primary:hover{
+    background-color: #e8679d;
+    border: none;
+}

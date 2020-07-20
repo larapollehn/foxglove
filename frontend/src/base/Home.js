@@ -35,7 +35,7 @@ const Home = () => {
 
     return (
         <div>
-            <Layout title="Home Page" description="MERN Stack app">
+            <Layout title="Wool Dreams" description="shop all the handcraft essentials">
                 <Search/>
                 <h2 className="mb-4">Best Sellers</h2>
                 {soldProducts.map((product, i) => (
