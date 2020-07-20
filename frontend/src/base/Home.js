@@ -30,30 +30,32 @@ const Home = () => {
     };
 
     const showImage = (product) => (
-        <img src={`/api/product/photo/${product._id}`} alt={product.name}/>
+        <img className="product-photo" src={`/api/product/photo/${product._id}`} alt={product.name}/>
     )
 
     return (
         <div>
-            <Layout title="Wool Dreams" description="shop all the handcraft essentials">
+            <Layout title="Wool Dreams" description="shop all the handcraft essentials" className="container">
                 <Search/>
                 <h2 className="mb-4">Best Sellers</h2>
-                {soldProducts.map((product, i) => (
-                    <div className="col-4 mb-3" key={i}>
-                        <div className="card" key={i}>
-                            <div className="card-header">{product.name}</div>
-                            {showImage(product)}
-                            <div className="card-body">
-                                <p className="card-text">{product.description}</p>
-                                <p>{product.price}€</p>
-                                <p>{product.quantity} books left</p>
-                                <Link to={`/product/${product._id}`}>
-                                    <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
-                                </Link>
+                <div className="row">
+                    {soldProducts.map((product, i) => (
+                        <div className="col-md-4 mb-3" key={i}>
+                            <div className="card" key={i}>
+                                <div className="card-header">{product.name}</div>
+                                {showImage(product)}
+                                <div className="card-body">
+                                    <p className="card-text">{product.description}</p>
+                                    <p>{product.price}€</p>
+                                    <p>{product.quantity} books left</p>
+                                    <Link to={`/product/${product._id}`}>
+                                        <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
+                                    </Link>
+                                </div>
                             </div>
-                        </div>
-                    </div>)
-                )}
+                        </div>)
+                    )}
+                </div>
             </Layout>
         </div>
     )

@@ -36,6 +36,16 @@
     color: #e4932c;
 }
 
+.product-photo{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+.card{
+    min-height: 500px;
+}
+
 .btn-primary{
     background-color: #ff3e8d;
     border: none;
