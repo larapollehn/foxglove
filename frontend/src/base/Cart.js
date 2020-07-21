@@ -62,7 +62,7 @@ const Cart = () => {
     return (
         <Layout
             title="Cart"
-            description="Buy them books now!"
+            description="Buy our wonderful books now!"
             className="container"
         >
             <div className="card">
@@ -79,7 +79,7 @@ const Cart = () => {
                             {item.name} | {item.price}€
                             <div className="input-group">
                                 <div className="input-group-prepend">
-                                    <span className="input-group-text">Amount</span>
+                                    <span className="input-group-text amount-label">Amount</span>
                                 </div>
                                 <input type="number" className="form-control" placeholder={item.count}
                                        onChange={changeProductAmount(item)}/>
@@ -96,16 +96,16 @@ const Cart = () => {
                         </Link>
                         </li>
                     )}
-                    <li className="list-group-item">Total: {totalPrice()}€</li>
+                    <li className="list-group-item price-list-item">Total: {totalPrice()}€</li>
                 </ul>
                 <div className="card-body">
                     {showBuyButton && (
                         <Link to={`/shop`}>
-                            <button className="btn btn-outline-primary mt-2 mb-2">Back to Shop</button>
+                            <button className="btn btn-outline-warning mt-2 mb-2">Back to Shop</button>
                         </Link>
                     )}
                     {items.length > 0 && showBuyButton && (
-                        <button onClick={openPayment} className="btn btn-outline-primary mt-2 mb-2">Order now</button>
+                        <button onClick={openPayment} className="btn btn-outline-warning mt-2 mb-2">Order now</button>
                     )}
                 </div>
             </div>
@@ -114,7 +114,7 @@ const Cart = () => {
                     <h3>Shipping Address</h3>
                     <div className="form-row">
                         <div className="form-group col-md-6">
-                            <label htmlFor="inputEmail4">Anrede</label>
+                            <label htmlFor="inputEmail4">Salutation</label>
                             <input type="text" className="form-control" placeholder="Mrs./Ms. or leave empty"/>
                         </div>
                         <div className="form-group col-md-6">
@@ -142,7 +142,7 @@ const Cart = () => {
                             <input type="text" className="form-control" placeholder="DE"/>
                         </div>
                         <div className="form-group col-md-2">
-                            <label htmlFor="inputZip">Zip</label>
+                            <label htmlFor="inputZip">Postal Code</label>
                             <input type="text" className="form-control" id="inputZip"/>
                         </div>
                     </div>

@@ -13,10 +13,10 @@ const Dashboard = () => {
                 <h4 className="card-header">User Information</h4>
                 <ul className="list-group">
                     <li className="list-group-item">
-                        <Link className="nav-link" to="/cart">Shopping Cart</Link>
+                        <Link className="nav-link dashboard-link" to="/cart">Shopping Cart</Link>
                     </li>
                     <li className="list-group-item">
-                        <Link className="nav-link" to="/profile/update">Profile Settings</Link>
+                        <Link className="nav-link dashboard-link" to="/profile/update">Profile Settings</Link>
                     </li>
                 </ul>
             </div>

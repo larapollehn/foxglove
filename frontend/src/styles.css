@@ -70,3 +70,24 @@
 .load-btn{
     margin-bottom: 20px;
 }
+
+.amount-label{
+    color: white;
+}
+
+.btn-outline-warning:hover{
+    color: white;
+}
+
+.dashboard-link{
+    color: #e4932c;
+}
+
+.dashboard-link:hover{
+    color: #ffb551;
+}
+
+.price-list-item{
+    font-size: 20px;
+    font-weight: bold;
+}

@@ -214,14 +214,14 @@ exports.getProductPhoto = (req, res, next) => {
 };
 
 /**
- * get six products to display on home screen
+ * get three products to display on home screen
  * @param req
  * @param res
  */
 exports.listAllProducts = (req, res) => {
     log.debug("List of products was requested");
     Product.find()
-        .limit(6)
+        .limit(3)
         .exec((err, products) => {
             if (err) {
                 return res.status(400)

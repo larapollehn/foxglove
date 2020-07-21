@@ -57,7 +57,7 @@ const Search = () => {
                 <div className="input-group input-group-lg">
                     <input type="search" className="form-control" onChange={handleChange("search")}
                            placeholder="Search by name..."/>
-                    <button className="btn search-btn" onClick={searchByUserInput}>Search</button>
+                    <button className="btn btn-outline-warning search-btn" onClick={searchByUserInput}>Search</button>
                 </div>
             </span>
 
@@ -65,12 +65,12 @@ const Search = () => {
     )
 
     const showImage = (product) => (
-        <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
+        <img className="product-photo" src={`/api/product/photo/${product._id}`} alt={product.name} />
     )
 
     const searchMessage = () => {
         if (searched && results.length > 0) {
-            return `Found ${results.length} products that match your search`;
+            return `Found ${results.length} product(s) that match your search`;
         } else if (searched && results.length < 1) {
             return "No Products found";
         }
@@ -87,14 +87,14 @@ const Search = () => {
                 <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
                 <div className="row">
                     {results.map((product, i) => (
-                        <div className="card col-md-3 mb-3" key={i}>
+                        <div className="card col-md-3 mb-3 searched-product" key={i}>
                             <div className="card-header">{product.name}</div>
                             {showImage(product)}
                             <div className="card-body">
                                 <p className="card-text">{product.description.substring(0, 50)}...</p>
                                 <p>{product.price}€</p>
                                 <Link to={`/product/${product._id}`}>
-                                    <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
+                                    <button className="btn btn-outline-warning mt-2 mb-2">View Product</button>
                                 </Link>
                             </div>
                         </div>
