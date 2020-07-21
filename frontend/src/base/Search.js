@@ -85,9 +85,9 @@ const Search = () => {
             <div className="container">
                 {searchForm()}
                 <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>
-                <div className="row">
+                <div className="row search-result">
                     {results.map((product, i) => (
-                        <div className="card col-md-3 mb-3 searched-product" key={i}>
+                        <div className="card col-md-4 mb-3 searched-product" key={i}>
                             <div className="card-header">{product.name}</div>
                             {showImage(product)}
                             <div className="card-body">

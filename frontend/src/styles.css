@@ -91,3 +91,21 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.search-result{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.create-product-photo{
+    background-color: #ff3e8d;
+    border: none;
+}
+.create-product-photo:hover{
+    background-color: #ff3e8d;
+    border: none;
+}
+
+.create-product-form{
+    margin-bottom: 20px;
+}

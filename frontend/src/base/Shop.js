@@ -125,7 +125,7 @@ const Shop = () => {
                         </ul>
                         <div className="card-body">
                             <Link to={`/cart`}>
-                                <button className="btn btn-outline-primary mt-2 mb-2">View Cart</button>
+                                <button className="btn btn-outline-warning mt-2 mb-2">View Cart</button>
                             </Link>
                         </div>
                     </div>
@@ -137,7 +137,7 @@ const Shop = () => {
     const addToCartButton = product => {
         if (product.quantity >= 1) {
             return (
-                <button onClick={() => {addToCart(product)}} className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                <button onClick={() => {addToCart(product)}} className="btn btn-outline-warning mt-2 mb-2">Add to Card</button>
             )
         }
     }
@@ -186,7 +186,7 @@ const Shop = () => {
                                     <p>{product.price}€</p>
                                     <p>{product.quantity} books left</p>
                                     <Link to={`/product/${product._id}`}>
-                                        <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
+                                        <button className="btn btn-outline-warning mt-2 mb-2">View Product</button>
                                     </Link>
                                     {addToCartButton(product)}
                                 </div>

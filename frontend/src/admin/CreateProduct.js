@@ -93,12 +93,12 @@ const CreateProduct = () => {
     );
 
     const newProductForm = () => (
-        <form onSubmit={submitProduct}>
+        <form onSubmit={submitProduct} className="create-product-form">
             <h4>Post Photo</h4>
             <div className="form-group">
-                <label className="btn btn-secondary">
+                <label className="btn btn-secondary create-product-photo">
                     <input
-                        onChange={handleChange("photo")} type="file" className="form-control"
+                        onChange={handleChange("photo")} type="file" className="form-control "
                     />
                 </label>
             </div>

@@ -90,8 +90,8 @@ const Cart = () => {
                             </div>
                         </li>
                     ))}
-                    {!items && (
-                        <li className="list-group-item">You have not added any items to your cart. <Link to={`/shop`}>
+                    {(!items || items.length === 0) && (
+                        <li className="list-group-item">You have not added any items to your cart. <Link className="dashboard-link" to={`/shop`}>
                             Shop now!
                         </Link>
                         </li>
@@ -158,10 +158,10 @@ const Cart = () => {
                         </div>
                     </div>
                     <Link to={`/shop`}>
-                        <button className="btn btn-outline-primary mt-2 mb-2">Back to Shop</button>
+                        <button className="btn btn-outline-warning mt-2 mb-2">Back to Shop</button>
                     </Link>
                     <Link to={`/confirmation`}>
-                        <button onClick={emptyCart} className="btn btn-outline-primary mt-2 mb-2">Checkout</button>
+                        <button onClick={emptyCart} className="btn btn-outline-warning mt-2 mb-2">Checkout</button>
                     </Link>
                 </div>
             )}
