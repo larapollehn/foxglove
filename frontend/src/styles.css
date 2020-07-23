@@ -80,11 +80,20 @@
 }
 
 .load-btn{
-    margin-bottom: 20px;
+    width: 100%;
+    color: white;
+}
+
+.load-btn:hover{
+    color: white;
 }
 
 .amount-label{
     color: white;
+}
+
+.btn-outline-warning{
+    margin-right: 10px;
 }
 
 .btn-outline-warning:hover{
@@ -132,7 +141,7 @@
 }
 
 .page-footer{
-    margin-top: 100px;
+    margin-top: 80px;
     padding-top: 5px;
     border-top: 2px solid #ff3e8d;
 }
@@ -147,4 +156,12 @@
 
 .footer-list-item:hover{
     color: #8b8787;
+}
+
+.radios-filter{
+    margin-left: 3px;
+}
+
+.filter-label{
+    margin-left: 20px;
 }

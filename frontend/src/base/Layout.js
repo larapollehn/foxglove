@@ -2,7 +2,7 @@ import React from "react";
 
 import logo from "../knit_logo.jpg";
 
-const Layout = ({title = "Title", description = "Description", className, children}) =>
+const Layout = ({className, children}) =>
     (
         <div id={"layout"} className="container">
             <div className={className}>{children}</div>

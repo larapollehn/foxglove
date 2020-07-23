@@ -59,7 +59,7 @@ const Shop = () => {
     const loadMoreButton = () => {
         return (
             productAmount > 0 && productAmount >= limit && (
-                <button className="btn btn-primary load-btn" onClick={loadMore}>Load More</button>
+                <button className="btn btn-warning load-btn" onClick={loadMore}>Load More</button>
             )
         )
     }
@@ -149,14 +149,21 @@ const Shop = () => {
             className="container"
         >
             <div className="row">
-                <div className="col-4">
+                <div className="col-md-9 offset-md-3">
+                    <h2>Products</h2>
+                    <p>Available products: {productAmount}</p>
+                </div>
+
+            </div>
+            <div className="row">
+                <div className="col-3">
                     {shoppingCart()}
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
                             <li className="list-unstyled" key={i}>
                                 <input onChange={handleCategoryToggle(category.the_id)} name={"category"} type="radio"
-                                       className="form-check-input" value={checkedCategories.indexOf(category.the_id)}/>
-                                <label className="form-check-label">{category._id}</label>
+                                       className="form-check-input radios-filter" value={checkedCategories.indexOf(category.the_id)}/>
+                                <label className="form-check-label filter-label">{category._id}</label>
                             </li>
                         )
                     )}
@@ -165,8 +172,8 @@ const Shop = () => {
                     {prices.map((range, i) => (
                             <li className="list-unstyled" key={i}>
                                 <input onChange={handelPriceChoice(range.array)} name={"price"} type="radio"
-                                       className="form-check-input" value={range._id}/>
-                                <label className="form-check-label">{range.name}</label>
+                                       className="form-check-input radios-filter" value={range._id}/>
+                                <label className="form-check-label filter-label">{range.name}</label>
                             </li>
                         )
                     )}
@@ -174,8 +181,6 @@ const Shop = () => {
                     <button onClick={fetchProducts} className="btn btn-primary">Apply Filters</button>
                 </div>
                 <div className="col-8">
-                    <h2>Products</h2>
-                    <p>Available Products: {productAmount}</p>
                     <div className="row">
                         {filteredProducts.slice(0, limit).map((product, i) => (
                             <div className="card col-md-6 mb-3" key={i}>
