@@ -156,27 +156,30 @@ const Shop = () => {
             <div className="row">
                 <div className="col-md-3 filter-section">
                     {shoppingCart()}
-                    <h4>Filter by categories</h4>
-                    {categories.map((category, i) => (
-                            <li className="list-unstyled" key={i}>
-                                <input onChange={handleCategoryToggle(category.the_id)} name={"category"} type="radio"
-                                       className="form-check-input radios-filter" value={checkedCategories.indexOf(category.the_id)}/>
-                                <label className="form-check-label filter-label">{category._id}</label>
-                            </li>
-                        )
-                    )}
-                    <br/>
-                    <h4>Filter by price</h4>
-                    {prices.map((range, i) => (
-                            <li className="list-unstyled" key={i}>
-                                <input onChange={handelPriceChoice(range.array)} name={"price"} type="radio"
-                                       className="form-check-input radios-filter" value={range._id}/>
-                                <label className="form-check-label filter-label">{range.name}</label>
-                            </li>
-                        )
-                    )}
-                    <br/>
-                    <button onClick={fetchProducts} className="btn btn-primary filter-button">Apply Filters</button>
+                    <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Button</button>
+                    <div  className="collapse multi-collapse" id="multiCollapseExample2">
+                        <h4>Filter by categories</h4>
+                        {categories.map((category, i) => (
+                                <li className="list-unstyled" key={i}>
+                                    <input onChange={handleCategoryToggle(category.the_id)} name={"category"} type="radio"
+                                           className="form-check-input radios-filter" value={checkedCategories.indexOf(category.the_id)}/>
+                                    <label className="form-check-label filter-label">{category._id}</label>
+                                </li>
+                            )
+                        )}
+                        <br/>
+                        <h4>Filter by price</h4>
+                        {prices.map((range, i) => (
+                                <li className="list-unstyled" key={i}>
+                                    <input onChange={handelPriceChoice(range.array)} name={"price"} type="radio"
+                                           className="form-check-input radios-filter" value={range._id}/>
+                                    <label className="form-check-label filter-label">{range.name}</label>
+                                </li>
+                            )
+                        )}
+                        <br/>
+                        <button onClick={fetchProducts} className="btn btn-primary filter-button">Apply Filters</button>
+                    </div>
                 </div>
                 <div className="col-md-9 offset-md-3">
                     <div className="row">
