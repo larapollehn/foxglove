@@ -37,7 +37,7 @@ const Product = (props) => {
     };
 
     const showImage = (product) => (
-        <img src={`/api/product/photo/${product._id}`} alt={product.name} style={{width: "100px"}}/>
+        <img src={`/api/product/photo/${product._id}`} alt={product.name} className="single-product-photo"/>
     );
 
     const availability = (product) => {
@@ -56,7 +56,7 @@ const Product = (props) => {
         if (product.quantity >= 1) {
             return (
                 <Link to="/">
-                    <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                    <button className="btn btn-outline-warning mt-2 mb-2">Add to Card</button>
                 </Link>
             )
         } else {
@@ -75,10 +75,9 @@ const Product = (props) => {
                         {showImage(product)}
                         <div className="card-body">
                             <p className="card-text">{product.description}...</p>
-                            <p>{product.price}€</p>
-                            <p>{product.quantity} books left</p>
+                            <p className="price-tag">{product.price}€</p>
                             <Link to={`/product/${product._id}`}>
-                                <button className="btn btn-outline-primary mt-2 mb-2">View Product</button>
+                                <button className="btn btn-outline-warning mt-2 mb-2">View Product</button>
                             </Link>
                             {buyIfAvailable(product)}
                         </div>
@@ -92,7 +91,7 @@ const Product = (props) => {
         if (product.quantity >= 1) {
             return (
                 <Link to="/cart">
-                    <button className="btn btn-outline-primary mt-2 mb-2">Add to Card</button>
+                    <button className="btn btn-outline-warning mt-2 mb-2">Add to Card</button>
                 </Link>
             )
         }
@@ -108,26 +107,26 @@ const Product = (props) => {
     return (
         <Layout
             title={product.name}
-            description={product.description}
+            description={""}
             className="container"
         >
             <div className="row">
-                <div className="card">
+                <div className="card col-md-8">
                     <div className="card-header">{product.name}</div>
                     {showImage(product)}
                     <div className="card-body">
-                        <p className="card-text">{product.description}...</p>
-                        <p>{product.price}€</p>
+                        <p className="card-text">{product.description}</p>
+                        <p className="price-tag">{product.price}€</p>
                         {availability(product)}
                         {addToCartButton(product)}
                     </div>
                 </div>
-            </div>
-            {relatedProducts.length > 0 && (
-                <h4>Related products you might also like</h4>
-            )}
-            <div className="row">
-                {showRelatedProducts()}
+                <div className="col-md-4">
+                    {relatedProducts.length > 0 && (
+                        <h4>Related products you might like</h4>
+                    )}
+                    {showRelatedProducts()}
+                </div>
             </div>
 
         </Layout>

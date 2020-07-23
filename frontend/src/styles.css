@@ -1,6 +1,7 @@
 .navbar-light .navbar-nav .nav-link{
     font-weight: bolder;
     font-size: 18px;
+    border-bottom: 2px solid #ff3e8d;
 }
 
 .badge-primary {
@@ -11,8 +12,8 @@
 
 .jumbotron{
     text-align: center;
-    padding: 10px;
     background-color: white;
+    padding: 0;
 }
 
 .jumbo-logo{
@@ -40,6 +41,17 @@
     width: 70%;
     margin: 0 auto;
     margin-top: 5px;
+}
+
+.single-product-photo{
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 5px;
+}
+
+.price-tag{
+    font-weight: bold;
+    font-size: 19px;
 }
 
 .card{
@@ -108,4 +120,31 @@
 
 .create-product-form{
     margin-bottom: 20px;
+}
+
+.nav-logo-sweater{
+    width: 80px;
+}
+
+.navbar-brand{
+    font-weight: bold;
+
+}
+
+.page-footer{
+    margin-top: 100px;
+    padding-top: 5px;
+    border-top: 2px solid #ff3e8d;
+}
+
+.footer-list{
+    list-style: none;
+}
+
+.footer-list-item{
+    color: #aca7a7;
+}
+
+.footer-list-item:hover{
+    color: #8b8787;
 }

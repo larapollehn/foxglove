@@ -4,6 +4,7 @@ import axios from "axios";
 
 import log from "../utils/Logger";
 import localStorageManager from "../utils/LocalStorageManager";
+import knitlogo from "../knit_logo.jpg";
 
 const isActive = (history, path) => {
     if(history.location.pathname === path){
@@ -50,8 +51,11 @@ const Navbar = ({history}) => {
     }, []);
 
     return (
-        <div>
+        <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light ">
+                <a className="navbar-brand" href="/">
+                    <img alt="sweater and yarn with needles" className="nav-logo-sweater" src={knitlogo}/> Wool Dreams
+                </a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false"
@@ -63,7 +67,7 @@ const Navbar = ({history}) => {
                 if user is authenticated only show specific nav options*/}
                 {localStorageManager.getUser() && (
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav ml-auto mr-auto">
+                        <ul className="navbar-nav ml-auto">
                             <li className="nav-item">
                                 <Link className="nav-link" style={isActive(history, "/")} to="/">Home</Link>
                             </li>

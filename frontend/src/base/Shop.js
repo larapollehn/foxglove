@@ -183,8 +183,8 @@ const Shop = () => {
                                 {showImage(product)}
                                 <div className="card-body">
                                     <p className="card-text">{product.description.substring(0, 50)}...</p>
-                                    <p>{product.price}€</p>
-                                    <p>{product.quantity} books left</p>
+                                    <p className="price-tag">{product.price}€</p>
+                                    <p>{product.quantity} items left</p>
                                     <Link to={`/product/${product._id}`}>
                                         <button className="btn btn-outline-warning mt-2 mb-2">View Product</button>
                                     </Link>

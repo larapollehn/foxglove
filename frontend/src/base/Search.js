@@ -92,7 +92,7 @@ const Search = () => {
                             {showImage(product)}
                             <div className="card-body">
                                 <p className="card-text">{product.description.substring(0, 50)}...</p>
-                                <p>{product.price}€</p>
+                                <p className="price-tag">{product.price}€</p>
                                 <Link to={`/product/${product._id}`}>
                                     <button className="btn btn-outline-warning mt-2 mb-2">View Product</button>
                                 </Link>
