@@ -61,13 +61,11 @@ const Cart = () => {
 
     return (
         <Layout
-            title="Cart"
-            description="Buy our wonderful books now!"
             className="container"
         >
             <div className="card">
                 <div className="card-body">
-                    <h5 className="card-title">Your Cart</h5>
+                    <h3 className="card-title">Your Cart</h3>
                     {items.length > 0 &&
                     <p className="card-text">You have {items.length} product(s) in your cart.</p>
                     }

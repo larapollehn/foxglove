@@ -173,3 +173,29 @@
 .badge{
     margin-right: 10px;
 }
+
+.dashboard-card{
+    margin-top: 20px;
+}
+
+.shop-cart{
+    margin-bottom: 20px;
+}
+
+.shop-cart-title{
+    font-weight: bold;
+}
+
+.filter-section{
+    position: fixed;
+}
+
+@media only screen and (max-width: 426px ) {
+    .page-footer{
+        text-align: center;
+    }
+
+    .related-product .filter-button{
+        margin-top: 20px;
+    }
+}

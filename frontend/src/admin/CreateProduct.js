@@ -151,10 +151,7 @@ const CreateProduct = () => {
 
     return (
         <div>
-            <Layout
-                title="Create new Product"
-                description="Create as many new products as needed."
-                className="container col-md-8 offset-md-2">
+            <Layout>
                 {showError()}
                 {showSuccess()}
                 {newProductForm()}

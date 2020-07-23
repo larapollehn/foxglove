@@ -112,9 +112,9 @@ const Shop = () => {
         if (products.length > 0) {
             return (
                 <div style={{display: showShoppingCart ? '' : "none"}}>
-                    <div className="card">
+                    <div className="card shop-cart">
                         <div className="card-body">
-                            <h5 className="card-title">Your Shopping Cart</h5>
+                            <h5 className="card-title shop-cart-title">Your Shopping Cart</h5>
                         </div>
                         <ul className="list-group list-group-flush">
                             {
@@ -144,8 +144,6 @@ const Shop = () => {
 
     return (
         <Layout
-            title="Shop"
-            description="Shop all the good, dreamy books"
             className="container"
         >
             <div className="row">
@@ -156,7 +154,7 @@ const Shop = () => {
 
             </div>
             <div className="row">
-                <div className="col-3">
+                <div className="col-md-3 filter-section">
                     {shoppingCart()}
                     <h4>Filter by categories</h4>
                     {categories.map((category, i) => (
@@ -178,9 +176,9 @@ const Shop = () => {
                         )
                     )}
                     <br/>
-                    <button onClick={fetchProducts} className="btn btn-primary">Apply Filters</button>
+                    <button onClick={fetchProducts} className="btn btn-primary filter-button">Apply Filters</button>
                 </div>
-                <div className="col-8">
+                <div className="col-md-9 offset-md-3">
                     <div className="row">
                         {filteredProducts.slice(0, limit).map((product, i) => (
                             <div className="card col-md-6 mb-3" key={i}>

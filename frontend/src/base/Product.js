@@ -102,20 +102,8 @@ const Product = (props) => {
 
     return (
         <Layout
-            title={product.name}
-            description={""}
             className="container"
         >
-            <div className="row">
-                <div className="col-md-8 product-title">
-                    <h4>Product Spotlight</h4>
-                </div>
-                <div className="col-md-4">
-                    {relatedProducts.length > 0 && (
-                        <h4>Related products</h4>
-                    )}
-                </div>
-            </div>
             <div className="row">
                 <div className="card col-md-8">
                     <div className="card-header">{product.name}</div>
@@ -127,11 +115,13 @@ const Product = (props) => {
                         {addToCartButton(product)}
                     </div>
                 </div>
-                <div className="col-md-4">
+                <div className="col-md-4 related-product">
+                    {relatedProducts.length > 0 && (
+                        <h4>Related products</h4>
+                    )}
                     {showRelatedProducts()}
                 </div>
             </div>
-
         </Layout>
     )
 }

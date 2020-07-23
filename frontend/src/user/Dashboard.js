@@ -9,7 +9,7 @@ const Dashboard = () => {
 
     const userLinks = () => {
         return (
-            <div className="card">
+            <div className="card dashboard-card">
                 <h4 className="card-header">Options</h4>
                 <ul className="list-group">
                     <li className="list-group-item">
@@ -22,7 +22,7 @@ const Dashboard = () => {
 
     const userInformation = () => {
         return (
-            <div className="card mb-5">
+            <div className="card mb-5 dashboard-card">
                 <h3 className="card-header">User Information</h3>
                 <ul className="list-group">
                     <li className="list-group-item">{name}</li>
@@ -33,7 +33,7 @@ const Dashboard = () => {
         )
     }
     return(
-        <Layout title="Dashboard" description={`Hello ${name}! Glad you are back.`} className="container">
+        <Layout>
             <div className="row">
                 <div className="col-3">
                     {userLinks()}
