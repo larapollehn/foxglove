@@ -165,3 +165,11 @@
 .filter-label{
     margin-left: 20px;
 }
+
+.product-title{
+    padding: 0;
+}
+
+.badge{
+    margin-right: 10px;
+}

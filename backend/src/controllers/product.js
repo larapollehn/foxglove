@@ -117,7 +117,7 @@ exports.updateProduct = (req, res) => {
  */
 exports.getRelatedProducts = (req, res) => {
     log.debug("Related proucts were requested");
-    const limit = req.query.limit ? parseInt(req.query.limit) : 3;
+    const limit = req.query.limit ? parseInt(req.query.limit) : 2;
     Product.find({
         _id: {$ne: req.product},
         category: req.product.category,

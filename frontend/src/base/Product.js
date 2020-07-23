@@ -41,11 +41,7 @@ const Product = (props) => {
     );
 
     const availability = (product) => {
-        if (product.quantity >= 1) {
-            return (
-                <span className="badge badge-primary">In Stock</span>
-            )
-        } else {
+        if (product.quantity < 1) {
             return (
                 <span className="badge badge-danger">Sold Out</span>
             )
@@ -74,7 +70,7 @@ const Product = (props) => {
                         <div className="card-header">{product.name}</div>
                         {showImage(product)}
                         <div className="card-body">
-                            <p className="card-text">{product.description}...</p>
+                            <p className="card-text">{product.description.substring(0, 50)}...</p>
                             <p className="price-tag">{product.price}€</p>
                             <Link to={`/product/${product._id}`}>
                                 <button className="btn btn-outline-warning mt-2 mb-2">View Product</button>
@@ -111,6 +107,16 @@ const Product = (props) => {
             className="container"
         >
             <div className="row">
+                <div className="col-md-8 product-title">
+                    <h4>Product Spotlight</h4>
+                </div>
+                <div className="col-md-4">
+                    {relatedProducts.length > 0 && (
+                        <h4>Related products</h4>
+                    )}
+                </div>
+            </div>
+            <div className="row">
                 <div className="card col-md-8">
                     <div className="card-header">{product.name}</div>
                     {showImage(product)}
@@ -122,9 +128,6 @@ const Product = (props) => {
                     </div>
                 </div>
                 <div className="col-md-4">
-                    {relatedProducts.length > 0 && (
-                        <h4>Related products you might like</h4>
-                    )}
                     {showRelatedProducts()}
                 </div>
             </div>
