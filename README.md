@@ -11,8 +11,7 @@ https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/
 ### Road map
 - [x] First Sprint: CRUD REST-ful API (Estimation: 3 Days)
 - [x] Second Sprint: Basic MVP Frontend (Estimation: 3 Days)
-- [ ] Third Sprint: Payment gateway and verification (Estimation: 2 - 3 Days)
-- [ ] Last Sprint: Final Styling and responsive (Estimation: 2 - 4 Days)  
+- [x] Last Sprint: Final Styling and responsive (Estimation: 2 - 4 Days)  
 
 ### How to setup the project
 Add proper environments in a `.env` file in directory `backend`:
