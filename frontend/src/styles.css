@@ -160,7 +160,7 @@
 }
 
 .confirmation-page{
-    text-align: center;
+    text-align: center !important;
 }
 
 .footer-list{
