@@ -3,7 +3,6 @@ import axios from "axios";
 
 import log from "../utils/Logger";
 import localStorageManager from "../utils/LocalStorageManager";
-import knitlogo from "../knit_logo.jpg";
 import fox_logo from "../base/fox.png";
 import {Nav, Navbar} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
