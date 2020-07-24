@@ -6,11 +6,13 @@ import {Link} from "react-router-dom";
 import paypal from "./paypal.png";
 import mastercard from "./mastercard.png";
 
+
 const Cart = () => {
     const [items, setItems] = useState([]);
     const [update, setUpdate] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [showBuyButton, setShowBuyButton] = useState(true);
+    const [error, setError] = useState(false);
 
     const totalPrice = () => {
         let sum = 0;
@@ -29,11 +31,27 @@ const Cart = () => {
         let newCount = event.target.value > 1 ? event.target.value : 1;
         items.map((item, i) => {
             if (item._id === product._id) {
-                items[i].count = newCount;
+                if(items[i].quantity > newCount){
+                    items[i].count = newCount;
+                } else {
+                    setError(true);
+                    setTimeout(() => {
+                        setError(false);
+                    }, 3000)
+                    items[i].count = items[i].quantity;
+                    let input = document.getElementById(`amount${items[i]._id}`);
+                    input.value = items[i].quantity;
+                }
             }
         })
         localStorageManager.saveCart(items);
     }
+
+    const showError = () => (
+        <div className="alert alert-danger" role="alert" style={{display: error ? '' : "none"}}>
+            Maximum amount of product reached.
+        </div>
+    );
 
     const deleteProductFromCart = product => {
         items.map((item, i) => {
@@ -79,7 +97,7 @@ const Cart = () => {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text amount-label">Amount</span>
                                 </div>
-                                <input type="number" className="form-control" placeholder={item.count}
+                                <input id={`amount${item._id}`} type="number" className="form-control" placeholder={item.count}
                                        onChange={changeProductAmount(item)}/>
                                 <button onClick={() => {
                                     deleteProductFromCart(item)
@@ -94,6 +112,7 @@ const Cart = () => {
                         </Link>
                         </li>
                     )}
+                    {showError()}
                     <li className="list-group-item price-list-item">Total: {totalPrice()}€</li>
                 </ul>
                 <div className="card-body">
