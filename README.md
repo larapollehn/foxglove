@@ -46,6 +46,23 @@ https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/
     </tr>
 </table>
 
+### Mobile (Xiaomi Redmi Note 5)
+
+<table border="1" width="100%">
+    <tr>
+        <td><img src="images/i8.jpeg" width="200"></td>
+        <td><img src="images/i7.jpeg" width="200"></td>
+        <td><img src="images/i1.jpeg" width="200"></td>
+        <td><img src="images/i5.jpeg" width="200"></td>
+    </tr>
+    <tr>
+        <td><img src="images/i4.jpeg" width="200"></td>
+        <td><img src="images/i3.jpeg" width="200"></td>
+        <td><img src="images/i2.jpeg" width="200"></td>
+        <td><img src="images/i9.jpeg" width="200"></td>
+    </tr>
+</table>
+
 ### Features that will be added in the future
 * Paypal sandbox (e.g. with braintree)
 * Users order history
