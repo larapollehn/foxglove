@@ -6,15 +6,14 @@ import localStorageManager from "../utils/LocalStorageManager";
 import knitlogo from "../knit_logo.jpg";
 import {Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
+import {withRouter} from "react-router-dom";
 
 const isActive = (history, path) => {
-    /**
      if (history.location.pathname === path) {
         return {color: "#e4932c"};
     } else {
         return {color: "#5a5855"};
     }
-     **/
 }
 
 /**
@@ -96,4 +95,4 @@ const PageNavMenu = ({history}) => {
     )
 }
 
-export default PageNavMenu;
+export default withRouter(PageNavMenu);
