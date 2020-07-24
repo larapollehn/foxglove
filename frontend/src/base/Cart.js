@@ -92,7 +92,7 @@ const Cart = () => {
                     {items.length > 0 && items.map((item, i) => (
                         <li key={i} className="list-group-item">
                             {showImage(item)}
-                            {item.name} | {item.price}€
+                            {item.name} | {item.price.toFixed(2)}€
                             <div className="input-group">
                                 <div className="input-group-prepend">
                                     <span className="input-group-text amount-label">Amount</span>

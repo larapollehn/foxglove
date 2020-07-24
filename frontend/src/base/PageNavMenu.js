@@ -4,6 +4,7 @@ import axios from "axios";
 import log from "../utils/Logger";
 import localStorageManager from "../utils/LocalStorageManager";
 import knitlogo from "../knit_logo.jpg";
+import fox_logo from "../base/fox.png";
 import {Nav, Navbar} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 
@@ -54,8 +55,8 @@ const PageNavMenu = ({history}) => {
     return (
         <div className="container">
             <Navbar expand="lg">
-                <Navbar.Brand href="/"><img alt="sweater and yarn with needles" className="nav-logo-sweater"
-                                            src={knitlogo}/> Wool Dreams</Navbar.Brand>
+                <Navbar.Brand href="/" className="site-brand-name"><img alt="fox" className="nav-logo-fox"
+                                            src={fox_logo}/> Foxglove</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse id="basic-navbar-nav">
                     {/*checks if user is authenticated/logged in based on the existence of the jwt token
@@ -73,7 +74,7 @@ const PageNavMenu = ({history}) => {
                                           href="/admin/dashboard">Dashboard</Nav.Link>
                             )}
                             <Nav.Link style={isActive(history, "/cart")} href="/cart">Cart <sup><small
-                                className="badge badge-pill badge-primary">{totalItems}</small></sup></Nav.Link>
+                                className="badge badge-pill badge-primary" id="cart-total-items-badge">{totalItems}</small></sup></Nav.Link>
                             <Nav.Link href="/" onClick={logout}>Logout</Nav.Link>
                         </Nav>
                     )}

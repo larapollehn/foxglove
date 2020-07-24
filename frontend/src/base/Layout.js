@@ -8,7 +8,7 @@ const Layout = ({className, children}) =>
                 <div className="col-md-3">
                     This is a not a real shop.
                     Do not buy anything from here.
-                    It is not real. Nothing will be send to you.
+                    It is not real. Nothing will be sent to you.
                 </div>
                 <div className="col-md-3">
                     <ul className="footer-list">

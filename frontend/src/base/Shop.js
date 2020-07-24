@@ -102,6 +102,8 @@ const Shop = () => {
     const addToCart = (product) => {
         log.debug("Clicked add to card button in Shop");
         addItemToCart(product, showCart);
+        let badge = document.getElementById("cart-total-items-badge");
+        badge.innerText = localStorageManager.getCart().length;
     }
 
     const showCart = () => {
@@ -122,10 +124,13 @@ const Shop = () => {
                         </div>
                         <ul className="list-group list-group-flush">
                             {
-                                products.map((product, i) => (
+                                products.slice(products.length-3,2).map((product, i) => (
                                     <li key={i} className="list-group-item">{product.name} - {product.price}€</li>
                                 ))
                             }
+                            {products.length > 3 && (
+                                <li className="list-group-item">and more ...</li>
+                            )}
                         </ul>
                         <div className="card-body">
                             <Link to={`/cart`}>
@@ -206,7 +211,7 @@ const Shop = () => {
                                 {showImage(product)}
                                 <div className="card-body">
                                     <p className="card-text">{product.description.substring(0, 50)}...</p>
-                                    <p className="price-tag">{product.price}€</p>
+                                    <p className="price-tag">{product.price.toFixed(2)}€</p>
                                     <p>{product.quantity} items left</p>
                                     <Link to={`/product/${product._id}`}>
                                         <button className="btn btn-outline-warning mt-2 mb-2">View Product</button>

@@ -72,7 +72,7 @@ const Product = (props) => {
                         {showImage(product)}
                         <div className="card-body">
                             <p className="card-text">{product.description.substring(0, 50)}...</p>
-                            <p className="price-tag">{product.price}€</p>
+                            <p className="price-tag">{product.price.toFixed(2)}€</p>
                             <Link to={`/product/${product._id}`}>
                                 <button className="btn btn-outline-warning mt-2 mb-2">View Product</button>
                             </Link>
@@ -112,7 +112,7 @@ const Product = (props) => {
                     {showImage(product)}
                     <div className="card-body">
                         <p className="card-text">{product.description}</p>
-                        <p className="price-tag">{product.price}€</p>
+                        <p className="price-tag">{product.price.toFixed(2)}€</p>
                         {availability(product)}
                         {addToCartButton(product)}
                     </div>
