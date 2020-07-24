@@ -89,8 +89,16 @@ const Shop = () => {
         })
     };
 
+    const resizeListener = () => {
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 425){
+                setOpenFilterMenu(false);
+            }
+        })
+    }
 
     useEffect(() => {
+        resizeListener();
         fetchProducts();
         listAllCategories();
     }, []);
@@ -167,13 +175,13 @@ const Shop = () => {
             <div className="row">
                 <div className="col-md-4 filter-section">
                     {shoppingCart()}
-                    <Button
-                        onClick={() => setOpenFilterMenu(!openFilterMenu)}
-                        aria-controls="collapsed-filter-menu"
-                        aria-expanded={openFilterMenu}
-                        className="btn btn-warning filter-button"
-                    >Set Filters</Button>
-                        <Collapse in={openFilterMenu}>
+                        <Button
+                            onClick={() => setOpenFilterMenu(!openFilterMenu)}
+                            aria-controls="collapsed-filter-menu"
+                            aria-expanded={openFilterMenu}
+                            className="btn btn-warning filter-button"
+                        >{openFilterMenu ? "Show Filter Options" : "Hide Filter Options"}</Button>
+                        <Collapse in={!openFilterMenu}>
                             <div id="collapsed-filter-menu">
                                 <h4>Filter by categories</h4>
                                 {categories.map((category, i) => (

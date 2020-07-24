@@ -24,6 +24,10 @@
     width: 300px;
 }
 
+.search-product-container{
+    margin-top: 25px;
+}
+
 .input-group-text{
     background-color: #ff3e8d;
     border: none;
@@ -135,7 +139,7 @@
 }
 
 .nav-logo-fox{
-    width: 60px;
+    width: 40px;
 }
 
 .navbar-brand{
@@ -152,11 +156,15 @@
     min-height: 70%;
 }
 
+.footer-hr{
+    margin-top: 40px;
+    border-top: 2px solid #ff3e8d;
+}
+
 .page-footer{
     height: 10%;
-    margin-top: 80px;
-    padding-top: 5px;
-    border-top: 2px solid #ff3e8d;
+    padding-top: 40px;
+    line-height: 2;
 }
 
 .confirmation-page{

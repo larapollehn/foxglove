@@ -81,7 +81,7 @@ const Search = () => {
     }, [])
 
     return (
-        <div className="row">
+        <div className="row search-product-container">
             <div className="container">
                 {searchForm()}
                 <h2 className="mt-4 mb-4">{searchMessage(searched, results)}</h2>

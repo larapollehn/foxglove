@@ -4,6 +4,7 @@ const Layout = ({className, children}) =>
     (
         <div id={"layout"} className="container layout-parent">
             <div className={className} id="layout-child">{children}</div>
+            <hr className="footer-hr"/>
             <footer className="row page-footer">
                 <div className="col-md-3">
                     This is a not a real shop.

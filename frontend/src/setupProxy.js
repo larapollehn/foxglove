@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         "/api",
         createProxyMiddleware({
-            target: "https://buchling.larapollehn.de",
+            target: "https://foxglove.larapollehn.de",
             "logLevel": "debug",
             changeOrigin: true
         })
