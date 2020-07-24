@@ -4,6 +4,7 @@ import axios from "axios";
 import Layout from "./Layout";
 import log from "../utils/Logger";
 import {Link} from "react-router-dom";
+import {addItemToCart} from "./helpers";
 
 const Product = (props) => {
     const [product, setProduct] = useState({});
@@ -85,6 +86,7 @@ const Product = (props) => {
 
     const addToCartButton = (product) => {
         if (product.quantity >= 1) {
+            addItemToCart(product, () => {log.debug("Added product to cart")});
             return (
                 <Link to="/cart">
                     <button className="btn btn-outline-warning mt-2 mb-2">Add to Card</button>

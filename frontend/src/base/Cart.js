@@ -152,7 +152,7 @@ const Cart = () => {
                     <div className="form-row">
                         <div className="form-group col-md-6">
                             <label htmlFor="inputCity">City</label>
-                            <input type="text" className="form-control" id="inputCity"/>
+                            <input type="text" className="form-control" id="inputCity" placeholder="City"/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="inputState">Country</label>
@@ -160,17 +160,14 @@ const Cart = () => {
                         </div>
                         <div className="form-group col-md-2">
                             <label htmlFor="inputZip">Postal Code</label>
-                            <input type="text" className="form-control" id="inputZip"/>
+                            <input type="text" className="form-control" id="inputZip" placeholder="12345"/>
                         </div>
                     </div>
-                    <h3>Info! You pay after receiving your order. Available Payment Options will be</h3>
+                    <h3>Info! <br/>You pay after receiving your order.</h3>
                     <div className="form-row">
                         <div className="form-group col-md-4">
-                            <label htmlFor="inputState">Mastercard</label>
+                            Available Payment Options will be: <br/>
                             <img src={mastercard} alt="mastercard logo"/>
-                        </div>
-                        <div className="form-group col-md-4">
-                            <label htmlFor="inputZip">Paypal</label>
                             <img src={paypal} alt="paypal logo"/>
                         </div>
                     </div>
