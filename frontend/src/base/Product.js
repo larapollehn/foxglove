@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import log from "../utils/Logger";
 import {Link} from "react-router-dom";
 import {addItemToCart} from "./helpers";
+import localStorageManager from "../utils/LocalStorageManager";
 
 const Product = (props) => {
     const [product, setProduct] = useState({});
@@ -86,10 +87,16 @@ const Product = (props) => {
 
     const addToCartButton = (product) => {
         if (product.quantity >= 1) {
-            addItemToCart(product, () => {log.debug("Added product to cart")});
+            addItemToCart(product, () => {
+                log.debug("Added product to cart")
+            });
             return (
                 <Link to="/cart">
-                    <button className="btn btn-outline-warning mt-2 mb-2">Add to Card</button>
+                    <button onClick={() => {
+                        let badge = document.getElementById("cart-total-items-badge");
+                        badge.innerText = localStorageManager.getCart().length;
+                    }} className="btn btn-outline-warning mt-2 mb-2">Add to Card
+                    </button>
                 </Link>
             )
         }
@@ -112,7 +119,7 @@ const Product = (props) => {
                     {showImage(product)}
                     <div className="card-body">
                         <p className="card-text">{product.description}</p>
-                        <p className="price-tag">{product.price.toFixed(2)}€</p>
+                        <p className="price-tag">{product.price !== undefined ? product.price.toFixed(2) : product.price}€</p>
                         {availability(product)}
                         {addToCartButton(product)}
                     </div>

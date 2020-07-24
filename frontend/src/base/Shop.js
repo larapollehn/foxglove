@@ -124,11 +124,11 @@ const Shop = () => {
                         </div>
                         <ul className="list-group list-group-flush">
                             {
-                                products.slice(products.length-3,2).map((product, i) => (
-                                    <li key={i} className="list-group-item">{product.name} - {product.price}€</li>
+                                products.reverse().slice(0,2).map((product, i) => (
+                                    <li key={i} className="list-group-item">{product.name} - {product.price.toFixed(2)}€</li>
                                 ))
                             }
-                            {products.length > 3 && (
+                            {products.length >= 3 && (
                                 <li className="list-group-item">and more ...</li>
                             )}
                         </ul>
