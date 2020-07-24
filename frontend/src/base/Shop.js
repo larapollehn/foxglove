@@ -6,6 +6,8 @@ import log from "../utils/Logger";
 import {addItemToCart, prices} from "./helpers";
 import localStorageManager from "../utils/LocalStorageManager";
 import {Link} from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Collapse from "react-bootstrap/Collapse";
 
 const Shop = () => {
     const {user, token} = localStorageManager.getUser();
@@ -17,6 +19,7 @@ const Shop = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [productAmount, setProductAmount] = useState(0);
     const [showShoppingCart, setShowCart] = useState(false);
+    const [openFilterMenu, setOpenFilterMenu] = useState(true);
 
     const handleCategoryToggle = checkedCategory => () => {
         log.debug("Newly checkedCategories category:", checkedCategory);
@@ -32,6 +35,7 @@ const Shop = () => {
     // https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/product/post_product_by_search
     const fetchProducts = () => {
         log.debug("Current args for fetching products: (skip, limit, filters)", skip, limit, priceRange[0], priceRange[1], checkedCategories);
+        setOpenFilterMenu(!openFilterMenu); //closes the filter menu
         axios({
             method: 'POST',
             url: "/api/product/by/search",
@@ -92,7 +96,7 @@ const Shop = () => {
     }, []);
 
     const showImage = (product) => (
-        <img className="product-photo"  src={`/api/product/photo/${product._id}`} alt={product.name}/>
+        <img className="product-photo" src={`/api/product/photo/${product._id}`} alt={product.name}/>
     )
 
     const addToCart = (product) => {
@@ -111,7 +115,7 @@ const Shop = () => {
         let products = localStorageManager.getCart();
         if (products.length > 0) {
             return (
-                <div style={{display: showShoppingCart ? '' : "none"}}>
+                <div style={{display: showShoppingCart ? '' : "none"}} id="shop-page-cart">
                     <div className="card shop-cart">
                         <div className="card-body">
                             <h5 className="card-title shop-cart-title">Your Shopping Cart</h5>
@@ -137,7 +141,9 @@ const Shop = () => {
     const addToCartButton = product => {
         if (product.quantity >= 1) {
             return (
-                <button onClick={() => {addToCart(product)}} className="btn btn-outline-warning mt-2 mb-2">Add to Card</button>
+                <button onClick={() => {
+                    addToCart(product)
+                }} className="btn btn-outline-warning mt-2 mb-2"><a href="#shop-page-cart" className="to-card-link">Add to Card</a></button>
             )
         }
     }
@@ -147,41 +153,52 @@ const Shop = () => {
             className="container"
         >
             <div className="row">
-                <div className="col-md-9 offset-md-3">
+                <div className="col-md-8 offset-md-4">
                     <h2>Products</h2>
                     <p>Available products: {productAmount}</p>
                 </div>
 
             </div>
             <div className="row">
-                <div className="col-md-3 filter-section">
+                <div className="col-md-4 filter-section">
                     {shoppingCart()}
-                    <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">Button</button>
-                    <div  className="collapse multi-collapse" id="multiCollapseExample2">
-                        <h4>Filter by categories</h4>
-                        {categories.map((category, i) => (
-                                <li className="list-unstyled" key={i}>
-                                    <input onChange={handleCategoryToggle(category.the_id)} name={"category"} type="radio"
-                                           className="form-check-input radios-filter" value={checkedCategories.indexOf(category.the_id)}/>
-                                    <label className="form-check-label filter-label">{category._id}</label>
-                                </li>
-                            )
-                        )}
-                        <br/>
-                        <h4>Filter by price</h4>
-                        {prices.map((range, i) => (
-                                <li className="list-unstyled" key={i}>
-                                    <input onChange={handelPriceChoice(range.array)} name={"price"} type="radio"
-                                           className="form-check-input radios-filter" value={range._id}/>
-                                    <label className="form-check-label filter-label">{range.name}</label>
-                                </li>
-                            )
-                        )}
-                        <br/>
-                        <button onClick={fetchProducts} className="btn btn-primary filter-button">Apply Filters</button>
-                    </div>
+                    <Button
+                        onClick={() => setOpenFilterMenu(!openFilterMenu)}
+                        aria-controls="collapsed-filter-menu"
+                        aria-expanded={openFilterMenu}
+                        className="btn btn-warning filter-button"
+                    >Set Filters</Button>
+                        <Collapse in={openFilterMenu}>
+                            <div id="collapsed-filter-menu">
+                                <h4>Filter by categories</h4>
+                                {categories.map((category, i) => (
+                                        <li className="list-unstyled" key={i}>
+                                            <input onChange={handleCategoryToggle(category.the_id)} name={"category"}
+                                                   type="radio"
+                                                   className="form-check-input radios-filter"
+                                                   value={checkedCategories.indexOf(category.the_id)}/>
+                                            <label className="form-check-label filter-label">{category._id}</label>
+                                        </li>
+                                    )
+                                )}
+                                <br/>
+                                <h4>Filter by price</h4>
+                                {prices.map((range, i) => (
+                                        <li className="list-unstyled" key={i}>
+                                            <input onChange={handelPriceChoice(range.array)} name={"price"} type="radio"
+                                                   className="form-check-input radios-filter" value={range._id}/>
+                                            <label className="form-check-label filter-label">{range.name}</label>
+                                        </li>
+                                    )
+                                )}
+                                <br/>
+                                <button onClick={fetchProducts} className="btn btn-primary filter-button">Apply
+                                    Filters
+                                </button>
+                            </div>
+                        </Collapse>
                 </div>
-                <div className="col-md-9 offset-md-3">
+                <div className="col-md-8 offset-md-4 shop-products-view">
                     <div className="row">
                         {filteredProducts.slice(0, limit).map((product, i) => (
                             <div className="card col-md-6 mb-3" key={i}>
@@ -203,7 +220,7 @@ const Shop = () => {
                 </div>
             </div>
         </Layout>
-    )
+)
 }
 
 

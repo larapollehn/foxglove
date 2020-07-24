@@ -88,6 +88,10 @@
     color: white;
 }
 
+.load-btn:active{
+    color: white !important;
+}
+
 .amount-label{
     color: white;
 }
@@ -190,12 +194,57 @@
     position: fixed;
 }
 
+.filter-button{
+    color: white;
+    width: 50%;
+    margin-bottom: 20px;
+}
+
+.filter-button:hover{
+    color: white;
+    background-color: #ff3e8d;
+}
+
+.filter-button:focus{
+    color: white !important;
+    background-color: #ff3e8d !important;
+}
+
+.to-card-link{
+    color: #ffc107;
+}
+
+.to-card-link:hover{
+    color: white;
+}
+
+.to-card-link:active{
+    color: white;
+}
+
+#shop-page-cart{
+    width: 50%;
+}
+
 @media only screen and (max-width: 426px ) {
     .page-footer{
         text-align: center;
     }
 
-    .related-product .filter-button{
+    .related-product{
         margin-top: 20px;
     }
+
+    .filter-button{
+        width: 100%;
+    }
+
+    .filter-section{
+        position: relative;
+    }
+
+    #shop-page-cart{
+        width: 100%;
+    }
+
 }
