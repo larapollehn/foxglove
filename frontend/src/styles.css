@@ -31,11 +31,10 @@
 }
 
 .search-btn{
-    background-color: white;
     margin-left: 10px;
     font-weight: bold;
-    color: #e4932c;
 }
+
 
 .product-photo{
     width: 70%;
@@ -64,6 +63,10 @@
     font-weight: bolder;
 }
 
+.btn-outline-warning:hover, .btn-outline-warning:focus, .btn-outline-warning:active{
+    color: white !important;
+}
+
 .btn-primary{
     background-color: #ff3e8d;
     border: none;
@@ -79,16 +82,8 @@
     border: none;
 }
 
-.load-btn{
+.load-btn, .load-btn:hover, .load-btn:active, .load-btn:focus{
     width: 100%;
-    color: white;
-}
-
-.load-btn:hover{
-    color: white;
-}
-
-.load-btn:active{
     color: white !important;
 }
 

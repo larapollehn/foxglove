@@ -9,7 +9,7 @@ const AdminDashboard = () => {
     const adminLinks = () => {
         return (
             <div className="card dashboard-card">
-                <h4 className="card-header">User Information</h4>
+                <h4 className="card-header">Options</h4>
                 <ul className="list-group">
                     <li className="list-group-item">
                         <Link className="nav-link dashboard-link" to="/create/category">Create Category</Link>
@@ -38,10 +38,10 @@ const AdminDashboard = () => {
     return(
         <Layout title="Dashboard" description={`Hello ${name}!`} className="container">
             <div className="row">
-                <div className="col-3">
+                <div className="col-md-3">
                     {adminLinks()}
                 </div>
-                <div className="col-9">
+                <div className="col-md-9">
                     {adminInformation()}
                 </div>
             </div>

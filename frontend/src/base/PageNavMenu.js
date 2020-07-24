@@ -4,8 +4,7 @@ import axios from "axios";
 import log from "../utils/Logger";
 import localStorageManager from "../utils/LocalStorageManager";
 import knitlogo from "../knit_logo.jpg";
-import {Form, FormControl, Nav, Navbar, NavDropdown} from "react-bootstrap";
-import Button from "react-bootstrap/Button";
+import {Nav, Navbar} from "react-bootstrap";
 import {withRouter} from "react-router-dom";
 
 const isActive = (history, path) => {
