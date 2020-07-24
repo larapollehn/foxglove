@@ -159,6 +159,10 @@
     border-top: 2px solid #ff3e8d;
 }
 
+.confirmation-page{
+    text-align: center;
+}
+
 .footer-list{
     list-style: none;
 }
@@ -209,12 +213,12 @@
     margin-bottom: 20px;
 }
 
-.filter-button:hover{
-    color: white;
-    background-color: #ff3e8d;
+.filter-button:hover, .filter-button:focus{
+    color: white !important;
+    background-color: #ff3e8d !important;
 }
 
-.filter-button:focus{
+.base-btn, .base-btn:hover, .base-btn:focus{
     color: white !important;
     background-color: #ff3e8d !important;
 }

@@ -49,7 +49,7 @@ const Registration = () => {
 
     const showError = () => (
         <div className="alert alert-danger" role="alert" style={{display: error ? '' : "none"}}>
-            {error}!
+            Something went wrong. Please try again.
         </div>
     );
 
@@ -73,7 +73,7 @@ const Registration = () => {
                 <label className="text-muted">Password</label>
                 <input onChange={handleChange("password")}  type="password" className="form-control" value={password} required/>
             </div>
-            <button onClick={submitUser} className="btn btn-primary">Register</button>
+            <button onClick={submitUser} className="btn btn-primary base-btn">Register</button>
         </form>
     );
 

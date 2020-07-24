@@ -8,8 +8,11 @@ const Confirmation = () => (
         description="We received your order."
         className="container"
     >
-        <h1>Thanks for the order</h1>
-        <Link to={`/shop`}>Shop More</Link>
+        <div id="confirmation-page">
+            <h1>Thanks for the order</h1>
+            <Link className="dashboard-link" to={`/shop`}>Shop More</Link>
+        </div>
+
     </Layout>
 )
 export default Confirmation;
