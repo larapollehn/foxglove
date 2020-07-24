@@ -60,6 +60,8 @@ const Cart = () => {
             }
         })
         localStorageManager.saveCart(items);
+        let badge = document.getElementById("cart-total-items-badge");
+        badge.innerText = localStorageManager.getCart().length;
         setUpdate(!update);
     }
 
