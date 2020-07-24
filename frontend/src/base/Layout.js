@@ -25,11 +25,9 @@ const Layout = ({className, children}) =>
                     </ul>
                 </div>
                 <div className="col-md-3">
-                    <ul className="footer-list">
-                        <li><a className="footer-list-item" href="/">Newsletter</a></li>
-                        <li><a className="footer-list-item" href="/">Warranty</a></li>
-                        <li><a className="footer-list-item" href="/">Disclaimer</a></li>
-                    </ul>
+                    Product images from: <br/>
+                    <a className="footer-list-item" href="https://shop.mybluprint.com" target="_blank">https://shop.mybluprint.com</a><br/>
+                    <a className="footer-list-item" href="https://www.amazon.de" target="_blank">https://www.amazon.de</a>
                 </div>
             </footer>
         </div>);
