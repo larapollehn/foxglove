@@ -2,8 +2,8 @@ import React from "react";
 
 const Layout = ({className, children}) =>
     (
-        <div id={"layout"} className="container">
-            <div className={className}>{children}</div>
+        <div id={"layout"} className="container layout-parent">
+            <div className={className} id="layout-child">{children}</div>
             <footer className="row page-footer">
                 <div className="col-md-3">
                     This is a not a real shop.

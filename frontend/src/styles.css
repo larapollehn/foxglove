@@ -143,7 +143,17 @@
     color: #5a5d8a;
 }
 
+.layout-parent{
+    height: 100vh;
+}
+
+#layout-child{
+    height: auto;
+    min-height: 70%;
+}
+
 .page-footer{
+    height: 10%;
     margin-top: 80px;
     padding-top: 5px;
     border-top: 2px solid #ff3e8d;
