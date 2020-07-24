@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.com/larapollehn/buchling.svg?branch=master)](https://travis-ci.com/larapollehn/buchling)
 
 # Foxglove  <img src="images/fox.png" width="50"/>
-#### Visit the live demo: <a href="https://foxglove.larapollehn.de/" target="_blank">Foxglove</a>
+## Visit the live demo here: <a href="https://foxglove.larapollehn.de/" target="_blank">Foxglove</a>
 
 ### Doc for API 
 https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/
