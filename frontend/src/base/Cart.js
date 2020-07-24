@@ -148,11 +148,11 @@ const Cart = () => {
                     <div className="form-row">
                         <div className="form-group col-md-4">
                             <label htmlFor="inputState">Mastercard</label>
-                            <img src={mastercard}/>
+                            <img src={mastercard} alt="mastercard logo"/>
                         </div>
                         <div className="form-group col-md-4">
                             <label htmlFor="inputZip">Paypal</label>
-                            <img src={paypal}/>
+                            <img src={paypal} alt="paypal logo"/>
                         </div>
                     </div>
                     <Link to={`/shop`}>

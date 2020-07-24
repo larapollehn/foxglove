@@ -1,7 +1,5 @@
 import React from "react";
 
-import logo from "../knit_logo.jpg";
-
 const Layout = ({className, children}) =>
     (
         <div id={"layout"} className="container">

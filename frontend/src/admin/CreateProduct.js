@@ -37,7 +37,7 @@ const CreateProduct = () => {
     useEffect(() => {
         listAllCategories();
         setValues({...values, formData: new FormData(), error: false, success: false});
-    }, []);
+    }, [values]);
 
     const handleChange = targetValue => event => {
         const value =

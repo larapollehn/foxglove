@@ -5,7 +5,6 @@ import {Link} from "react-router-dom";
 import Layout from "./Layout";
 import log from "../utils/Logger";
 import Search from "./Search";
-import {addItemToCart} from "../base/helpers";
 
 /**
  * https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/product/get_products_listAll

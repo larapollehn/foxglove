@@ -4,7 +4,7 @@ import {BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import Registration from "./user/Registration";
 import Login from "./user/Login";
 import Home from "./base/Home";
-import Navbar from "./base/Navbar";
+import PageNavMenu from "./base/PageNavMenu";
 import Dashboard from "./user/Dashboard";
 import localStorageManager from "./utils/LocalStorageManager";
 import AdminDashboard from "./user/AdminDashboard";
@@ -18,7 +18,7 @@ import Confirmation from "./base/Confirmation";
 const Router = () => {
     return (
         <BrowserRouter>
-            <Navbar/>
+            <PageNavMenu/>
             <Switch>
                 <Route path="/" exact component={Home}/>
                 <Route path="/signin" exact component={Login}/>
