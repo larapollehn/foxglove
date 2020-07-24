@@ -24,20 +24,25 @@ https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/
     <tr>
         <img src="images/p1.png" >
     </tr>
+    <hr>
     <tr>
-        <img src="images/p6.png" width="100%">
+        <img src="images/p6.png">
     </tr>
+    <hr>
     <tr>
-        <img src="images/p2.png" width="400">
+        <img src="images/p2.png">
     </tr>
+    <hr>
     <tr>
-        <img src="images/p3.png" width="400">
+        <img src="images/p3.png">
     </tr>
+    <hr>
     <tr>
-         <img src="images/p5.png" width="400">
+         <img src="images/p5.png">
     </tr>
+    <hr>
     <tr>
-        <img src="images/p4.png" width="400">
+        <img src="images/p4.png">
     </tr>
 </table>
 
