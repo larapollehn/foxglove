@@ -22,10 +22,10 @@ https://app.swaggerhub.com/apis/larapollehn/buchling/1.0.0#/
 
 <table border="1" width="100%">
     <tr>
-        <img src="images/p1.png" width="400">
+        <img src="images/p1.png" >
     </tr>
     <tr>
-        <img src="images/p6.png" width="400">
+        <img src="images/p6.png" width="100%">
     </tr>
     <tr>
         <img src="images/p2.png" width="400">
