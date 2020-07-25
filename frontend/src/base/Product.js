@@ -53,7 +53,7 @@ const Product = (props) => {
     const buyIfAvailable = (product) => {
         if (product.quantity >= 1) {
             return (
-                <Link to="/">
+                <Link to="/cart">
                     <button className="btn btn-outline-warning mt-2 mb-2">Add to Card</button>
                 </Link>
             )
@@ -94,7 +94,9 @@ const Product = (props) => {
                 <Link to="/cart">
                     <button onClick={() => {
                         let badge = document.getElementById("cart-total-items-badge");
-                        badge.innerText = localStorageManager.getCart().length;
+                        if(badge){
+                            badge.innerText = localStorageManager.getCart().length;
+                        }
                     }} className="btn btn-outline-warning mt-2 mb-2">Add to Card
                     </button>
                 </Link>

@@ -111,7 +111,9 @@ const Shop = () => {
         log.debug("Clicked add to card button in Shop");
         addItemToCart(product, showCart);
         let badge = document.getElementById("cart-total-items-badge");
-        badge.innerText = localStorageManager.getCart().length;
+        if(badge){
+            badge.innerText = localStorageManager.getCart().length;
+        }
     }
 
     const showCart = () => {
