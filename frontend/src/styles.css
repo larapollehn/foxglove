@@ -107,8 +107,12 @@
     color: white;
 }
 
+.btn-outline-warning:focus, .btn-outline-warning:active{
+    color: #ffc107 !important;
+}
+
 .dashboard-link{
-    color: #e4932c;
+    color: #ffc107;
 }
 
 .dashboard-link:hover{
