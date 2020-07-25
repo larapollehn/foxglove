@@ -103,11 +103,11 @@
     margin-right: 10px;
 }
 
-.btn-outline-warning:hover{
-    color: white;
+.btn-outline-warning:hover, .btn-outline-warning:focus{
+    color: white !important;
 }
 
-.btn-outline-warning:focus, .btn-outline-warning:active{
+.btn-outline-warning:active{
     color: #ffc107 !important;
 }
 
