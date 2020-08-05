@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/larapollehn/buchling.svg?branch=master)](https://travis-ci.com/larapollehn/buchling)
+[![Build Status](https://travis-ci.com/larapollehn/foxglove.svg?branch=master)](https://travis-ci.com/larapollehn/foxglove)
 
 # <img src="images/fox.png" width="50"/> Foxglove
 ##### Visit the live demo here: <a href="https://foxglove.larapollehn.de/" target="_blank">Foxglove</a>
